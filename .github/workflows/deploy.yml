@@ -6,29 +6,47 @@ on:
       - main  # Change this if your main branch has a different name
 
 jobs:
-  deploy:
+  build_site:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'  # Specify your Node.js version
+          node-version: '20'  # Specify your Node.js version
+          cache: npm
 
       - name: Install dependencies
         run: |
           npm install
-          npm install -D @sveltejs/adapter-static
-
+          
       - name: Build the project
+        env:
+            BASE_PATH: '/${{ github.event.repository.name }}'
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v2
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .svelte-kit/output/client
-          publish_branch: gh-pages  # Specify the branch for GitHub Pages
+          path: 'build/'
+
+  deploy:
+        needs: build_site
+        runs-on: ubuntu-latest
+
+        permissions:
+            pages: write
+            id-token: write
+
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.output.page_url }}
+
+        steps:
+          - name: Deploy
+            id: deployment
+            uses: actions/deploy-pages@v4
