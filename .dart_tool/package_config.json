@@ -123,9 +123,9 @@
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///Users/abidnasim/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
+      "rootUri": "file:///Users/abidnasim/.pub-cache/hosted/pub.dev/stack_trace-1.12.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.4"
     },
     {
       "name": "stream_channel",
@@ -170,10 +170,10 @@
       "languageVersion": "3.6"
     }
   ],
-  "generated": "2024-10-01T22:23:37.532624Z",
+  "generated": "2024-10-03T00:36:20.089575Z",
   "generator": "pub",
-  "generatorVersion": "3.6.0-279.0.dev",
+  "generatorVersion": "3.6.0-313.0.dev",
   "flutterRoot": "file:///Users/abidnasim/flutter",
-  "flutterVersion": "3.26.0-1.0.pre.263",
+  "flutterVersion": "3.26.0-1.0.pre.338",
   "pubCache": "file:///Users/abidnasim/.pub-cache"
 }
