@@ -697,7 +697,7 @@ class _WorkSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return const _ContentSection(
       eyebrow: 'SELECTED WORK',
-      title: 'A framework for\nwhat comes next.',
+      title: 'For over 30 years\nI have delivered projects, like:',
       child: _WorkPlaceholder(),
     );
   }
@@ -731,7 +731,7 @@ class _WorkPlaceholder extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           const Text(
-            'Your work goes here.',
+            'coming soon ...',
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.w700,
@@ -739,7 +739,6 @@ class _WorkPlaceholder extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           Text(
-            'We will replace this framework with your real '
             'projects, companies, products, achievements, and case studies.',
             style: TextStyle(
               color: Colors.white.withValues(alpha: 0.52),
