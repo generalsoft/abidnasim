@@ -456,6 +456,12 @@ class _PresenceCards extends StatelessWidget {
   Widget build(BuildContext context) {
     final cards = [
       const _RegionData(
+        region: 'United Arab Emirates',
+        code: 'AE',
+        domain: 'nasim.ae',
+        url: 'https://nasim.ae',
+      ),
+      const _RegionData(
         region: 'Pakistan',
         code: 'PK',
         domain: 'nasim.pk',
@@ -466,12 +472,6 @@ class _PresenceCards extends StatelessWidget {
         code: 'US',
         domain: 'nasim.us',
         url: 'https://nasim.us',
-      ),
-      const _RegionData(
-        region: 'United Arab Emirates',
-        code: 'AE',
-        domain: 'nasim.ae',
-        url: 'https://nasim.ae',
       ),
     ];
 
