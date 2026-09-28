@@ -1,6 +1,71 @@
 // Shared extras for the regional sites (imported after minima).
 // Uses logical properties so it works in both LTR and RTL.
 
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.hero-content {
+  min-width: 0;
+}
+
+.hero-content h1 {
+  margin-bottom: 16px;
+}
+
+.hero-subtitle {
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+}
+
+.hero-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.hero-roles span {
+  padding: 6px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--toggle-background);
+}
+
+.hero-image {
+  text-align: center;
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+/* Mobile */
+@media screen and (max-width: 700px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .hero-image {
+    order: -1;
+  }
+
+  .hero-image img {
+    max-width: 320px;
+  }
+}
+
 .card-list {
   list-style: none;
   margin: 0;
@@ -167,3 +232,5 @@ a {
   outline: 2px solid var(--link-color);
   outline-offset: 2px;
 }
+
+
