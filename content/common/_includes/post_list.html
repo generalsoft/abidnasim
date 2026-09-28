@@ -1,0 +1,28 @@
+{%- comment -%}
+  Card list of posts for one section.
+  Usage: {% include post_list.html section="work" %}
+         {% include post_list.html section="work" count=4 %}
+{%- endcomment -%}
+{%- assign items = site.posts | where: "section", include.section -%}
+{%- if include.count -%}
+  {%- assign items = items | slice: 0, include.count -%}
+{%- endif -%}
+<ul class="card-list">
+{%- for post in items -%}
+  <li class="card">
+    {%- if post.image -%}
+    <a href="{{ post.url | relative_url }}"><img src="{{ post.image | relative_url }}" alt="{{ post.image_alt | escape }}" loading="lazy"></a>
+    {%- endif -%}
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+    <p class="post-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d %H:%M" }}</time></p>
+    <p>{{ post.description | strip }}</p>
+    {%- if post.tags and post.tags.size > 0 -%}
+    <ul class="tags">
+      {%- for tag in post.tags -%}
+      <li>#{{ tag }}</li>
+      {%- endfor -%}
+    </ul>
+    {%- endif -%}
+  </li>
+{%- endfor -%}
+</ul>

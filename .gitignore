@@ -23,3 +23,6 @@ vite.config.ts.timestamp-*
 # ignore build stuff
 .dart_tool/
 build/
+
+# temp
+lib/main_backup.dart

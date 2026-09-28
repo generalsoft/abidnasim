@@ -1,0 +1,29 @@
+theme: minima
+title: عابد نسيم
+description: الموقع الشخصي لعابد نسيم (الإمارات)
+url: https://nasim.ae
+lang: ar
+timezone: Asia/Dubai
+show_excerpts: false
+
+author:
+  name: عابد نسيم
+
+minima:
+  date_format: "%Y-%m-%d"
+
+# Arabic labels used by the shared post layout (content/common/_layouts/post.html)
+section_labels:
+  work: الأعمال
+  blog: المدونة
+  hobby: الهوايات
+
+header_pages:
+  - work.md
+  - blog.md
+  - hobby.md
+  - about.md
+  - contact.md
+
+plugins:
+  - jekyll-seo-tag

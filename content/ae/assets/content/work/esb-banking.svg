@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 700" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eef2f7" />
+      <stop offset="100%" style="stop-color:#cfdde6" />
+    </linearGradient>
+    <!-- Pre-ESB silo gradient -->
+    <linearGradient id="siloGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c0392b" />
+      <stop offset="100%" style="stop-color:#e74c3c" />
+    </linearGradient>
+    <!-- ESB gradient -->
+    <linearGradient id="esbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a5276" />
+      <stop offset="100%" style="stop-color:#2980b9" />
+    </linearGradient>
+    <!-- Connected system gradient -->
+    <linearGradient id="sysGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50" />
+      <stop offset="100%" style="stop-color:#34495e" />
+    </linearGradient>
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+    <!-- Arrow marker -->
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2980b9" />
+    </marker>
+    <marker id="arrowDark" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="950" height="700" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="475" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a252f">Banking Enterprise Service Bus (ESB) – Integration Modernization (2005)</text>
+  <line x1="180" y1="52" x2="770" y2="52" stroke="#1a5276" stroke-width="2" opacity="0.4"/>
+
+  <!-- ====== LEFT SIDE: Legacy silos (before) ====== -->
+  <rect x="30" y="80" width="280" height="320" rx="12" fill="#fdf2e9" stroke="#e74c3c" stroke-width="2" filter="url(#shadow)"/>
+  <text x="170" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="#c0392b">❌ Before: Disparate Silos</text>
+  <line x1="50" y1="122" x2="290" y2="122" stroke="#e74c3c" stroke-width="1" opacity="0.4"/>
+
+  <!-- Siloed systems -->
+  <rect x="55" y="140" width="230" height="50" rx="6" fill="url(#siloGrad)"/>
+  <text x="170" y="162" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">CRM (Customer)</text>
+  <text x="170" y="180" text-anchor="middle" font-size="10" fill="#f9e0d9">Salesforce / Siebel</text>
+
+  <rect x="55" y="210" width="230" height="50" rx="6" fill="url(#siloGrad)"/>
+  <text x="170" y="232" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">ERP (Finance)</text>
+  <text x="170" y="250" text-anchor="middle" font-size="10" fill="#f9e0d9">Oracle / SAP – GL, AP, AR</text>
+
+  <rect x="55" y="280" width="230" height="50" rx="6" fill="url(#siloGrad)"/>
+  <text x="170" y="302" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Document Management</text>
+  <text x="170" y="320" text-anchor="middle" font-size="10" fill="#f9e0d9">FileNet / Documentum</text>
+
+  <rect x="55" y="350" width="230" height="50" rx="6" fill="url(#siloGrad)"/>
+  <text x="170" y="372" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">Reporting / BI</text>
+  <text x="170" y="390" text-anchor="middle" font-size="10" fill="#f9e0d9">Cognos / Business Objects</text>
+
+  <!-- X-cross marks between silos -->
+  <g stroke="#e74c3c" stroke-width="2" opacity="0.6">
+    <line x1="310" y1="160" x2="330" y2="180"/>
+    <line x1="330" y1="160" x2="310" y2="180"/>
+    <line x1="310" y1="235" x2="330" y2="255"/>
+    <line x1="330" y1="235" x2="310" y2="255"/>
+    <line x1="310" y1="305" x2="330" y2="325"/>
+    <line x1="330" y1="305" x2="310" y2="325"/>
+    <line x1="310" y1="375" x2="330" y2="395"/>
+    <line x1="330" y1="375" x2="310" y2="395"/>
+  </g>
+  <text x="330" y="270" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="bold">No integration</text>
+  <text x="330" y="284" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="bold">Data inconsistencies</text>
+
+  <!-- ====== CENTER: ESB (Your work) ====== -->
+  <rect x="370" y="150" width="210" height="220" rx="16" fill="url(#esbGrad)" filter="url(#shadow)" stroke="#0e3d5c" stroke-width="3"/>
+  <text x="475" y="185" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">⚙️ Enterprise Service Bus</text>
+  <text x="475" y="210" text-anchor="middle" font-size="12" fill="#b8d8fc">(Central Nervous System)</text>
+  <line x1="395" y1="222" x2="555" y2="222" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+  <text x="475" y="248" text-anchor="middle" font-size="11" fill="#cde4fc">Message routing &amp; transformation</text>
+  <text x="475" y="268" text-anchor="middle" font-size="11" fill="#cde4fc">Protocol bridging (SOAP/JMS/HTTP)</text>
+  <text x="475" y="288" text-anchor="middle" font-size="11" fill="#cde4fc">Service registry &amp; orchestration</text>
+  <text x="475" y="308" text-anchor="middle" font-size="11" fill="#cde4fc">Transaction coordination</text>
+  <text x="475" y="328" text-anchor="middle" font-size="11" fill="#cde4fc">Centralized logging &amp; monitoring</text>
+
+  <!-- Role indicator -->
+  <rect x="410" y="345" width="130" height="28" rx="14" fill="#f39c12" filter="url(#shadow)"/>
+  <text x="475" y="364" text-anchor="middle" font-size="11" font-weight="bold" fill="#2c3e50">Your role: Design &amp; Implementation</text>
+
+  <!-- ====== RIGHT SIDE: Modernized connected systems ====== -->
+  <rect x="640" y="80" width="280" height="320" rx="12" fill="#e8f8f5" stroke="#1abc9c" stroke-width="2" filter="url(#shadow)"/>
+  <text x="780" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="#0e6655">✅ After: Unified Integration</text>
+  <line x1="660" y1="122" x2="900" y2="122" stroke="#1abc9c" stroke-width="1" opacity="0.4"/>
+
+  <!-- Connected systems (rectangles with check marks) -->
+  <rect x="660" y="140" width="240" height="45" rx="6" fill="url(#sysGrad)"/>
+  <text x="780" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="#ecf0f1">CRM</text>
+  <text x="780" y="174" text-anchor="middle" font-size="10" fill="#bdc3c7">360° customer view</text>
+  <text x="890" y="167" font-size="16" fill="#2ecc71">✓</text>
+
+  <rect x="660" y="200" width="240" height="45" rx="6" fill="url(#sysGrad)"/>
+  <text x="780" y="218" text-anchor="middle" font-size="12" font-weight="bold" fill="#ecf0f1">ERP (Financial)</text>
+  <text x="780" y="234" text-anchor="middle" font-size="10" fill="#bdc3c7">Real‑time GL / AP / AR</text>
+  <text x="890" y="227" font-size="16" fill="#2ecc71">✓</text>
+
+  <rect x="660" y="260" width="240" height="45" rx="6" fill="url(#sysGrad)"/>
+  <text x="780" y="278" text-anchor="middle" font-size="12" font-weight="bold" fill="#ecf0f1">Document Management</text>
+  <text x="780" y="294" text-anchor="middle" font-size="10" fill="#bdc3c7">Automated workflows</text>
+  <text x="890" y="287" font-size="16" fill="#2ecc71">✓</text>
+
+  <rect x="660" y="320" width="240" height="45" rx="6" fill="url(#sysGrad)"/>
+  <text x="780" y="338" text-anchor="middle" font-size="12" font-weight="bold" fill="#ecf0f1">Reporting / BI</text>
+  <text x="780" y="354" text-anchor="middle" font-size="10" fill="#bdc3c7">Single source of truth</text>
+  <text x="890" y="347" font-size="16" fill="#2ecc71">✓</text>
+
+  <!-- ====== ARROWS: ESB to/from connected systems ====== -->
+  <!-- Left silos to ESB (with X) – but these are being replaced, so maybe dashed lines? I'll show that legacy silos feed into ESB -->
+  <line x1="310" y1="165" x2="370" y2="180" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowDark)"/>
+  <line x1="310" y1="235" x2="370" y2="240" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowDark)"/>
+  <line x1="310" y1="305" x2="370" y2="300" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowDark)"/>
+  <line x1="310" y1="375" x2="370" y2="360" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowDark)"/>
+
+  <!-- ESB to right connected systems (solid arrows) -->
+  <line x1="580" y1="180" x2="640" y2="165" stroke="#2980b9" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <line x1="580" y1="240" x2="640" y2="225" stroke="#2980b9" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <line x1="580" y1="300" x2="640" y2="285" stroke="#2980b9" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <line x1="580" y1="360" x2="640" y2="345" stroke="#2980b9" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- ====== BOTTOM: NEW YORK BANK HEADQUARTERS ====== -->
+  <rect x="280" y="460" width="390" height="70" rx="12" fill="#1b2631" filter="url(#shadow)"/>
+  <text x="475" y="492" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">🏦 New York–Based Bank – Headquarters</text>
+  <text x="475" y="516" text-anchor="middle" font-size="11" fill="#bdc3c7">Enterprise architecture modernization · ESB as central nervous system</text>
+
+  <!-- Connection from ESB to HQ -->
+  <line x1="475" y1="370" x2="475" y2="460" stroke="#2980b9" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrowBlue)"/>
+
+  <!-- ====== BENEFITS PANEL ====== -->
+  <rect x="120" y="555" width="710" height="55" rx="10" fill="#fff" stroke="#34495e" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="475" y="578" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a5276">Key Outcomes – Data consistency, streamlined processes, faster time‑to‑market</text>
+  <text x="475" y="596" text-anchor="middle" font-size="11" fill="#2c3e50">Eliminated point‑to‑point spaghetti integration · Reusable business services · Real‑time monitoring</text>
+
+  <!-- ====== TIMESTAMP ====== -->
+  <text x="475" y="640" text-anchor="middle" font-size="11" fill="#5a6c7e">📅 2005 – Enterprise‑wide ESB rollout across all LOB systems</text>
+
+  <!-- Legend -->
+  <rect x="220" y="660" width="510" height="35" rx="6" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+  <rect x="240" y="670" width="15" height="10" fill="url(#siloGrad)" rx="2"/>
+  <text x="262" y="679" font-size="10" fill="#333">Legacy silos (pre‑ESB)</text>
+  <rect x="390" y="670" width="15" height="10" fill="url(#esbGrad)" rx="2"/>
+  <text x="412" y="679" font-size="10" fill="#333">ESB (your solution)</text>
+  <rect x="540" y="670" width="15" height="10" fill="url(#sysGrad)" rx="2"/>
+  <text x="562" y="679" font-size="10" fill="#333">Connected systems (post‑ESB)</text>
+</svg>
