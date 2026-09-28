@@ -64,9 +64,11 @@ jobs:
           - region: pk
             repo: generalsoft/nasim-pk
             domain: nasim.pk
+
           - region: us
             repo: generalsoft/nasim-us
             domain: nasim.us
+
           - region: ae
             repo: generalsoft/nasim-ae
             domain: nasim.ae
@@ -78,11 +80,13 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.3"
+          ruby-version: '3.3'
           bundler-cache: false
 
-      - name: Install Jekyll
-        run: gem install jekyll bundler
+      - name: Install Jekyll dependencies
+        run: |
+          cd content
+          bundle install
 
       - name: Assemble ${{ matrix.region }} site
         run: |
@@ -98,9 +102,11 @@ jobs:
         run: |
           mkdir -p built/${{ matrix.region }}
 
-          jekyll build \
-            --source staging/${{ matrix.region }} \
-            --destination built/${{ matrix.region }}
+          cd content
+
+          bundle exec jekyll build \
+            --source ../staging/${{ matrix.region }} \
+            --destination ../built/${{ matrix.region }}
 
       - name: Deploy ${{ matrix.region }} site
         uses: peaceiris/actions-gh-pages@v4
