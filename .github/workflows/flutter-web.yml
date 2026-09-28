@@ -57,6 +57,7 @@ jobs:
 
   deploy-regional-sites:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         include:
@@ -74,20 +75,39 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: false
+
+      - name: Install Jekyll
+        run: gem install jekyll bundler
+
       - name: Assemble ${{ matrix.region }} site
         run: |
           mkdir -p staging/${{ matrix.region }}
+
           if [ -d content/common ]; then
             cp -r content/common/. staging/${{ matrix.region }}/
           fi
+
           cp -r content/${{ matrix.region }}/. staging/${{ matrix.region }}/
 
-      - name: Deploy ${{ matrix.region }} content
+      - name: Build ${{ matrix.region }} with Jekyll
+        run: |
+          mkdir -p built/${{ matrix.region }}
+
+          jekyll build \
+            --source staging/${{ matrix.region }} \
+            --destination built/${{ matrix.region }}
+
+      - name: Deploy ${{ matrix.region }} site
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.REGIONAL_SITES_PAT }}
           external_repository: ${{ matrix.repo }}
           publish_branch: main
-          publish_dir: staging/${{ matrix.region }}
+          publish_dir: built/${{ matrix.region }}
           cname: ${{ matrix.domain }}
           keep_files: false
