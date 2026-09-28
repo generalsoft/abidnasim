@@ -1,0 +1,69 @@
+// Shared extras for the regional sites (imported after minima).
+// Uses logical properties so it works in both LTR and RTL.
+
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.card {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0;
+
+  img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  h3 {
+    margin: 0.75rem 0 0.25rem;
+    font-size: 1.05rem;
+  }
+}
+
+.tags {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  li {
+    margin: 0;
+    font-size: 0.8rem;
+    padding: 0.1rem 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    color: #666;
+  }
+}
+
+.post-lead {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.post-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+.page-images img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 0 0 1rem;
+}

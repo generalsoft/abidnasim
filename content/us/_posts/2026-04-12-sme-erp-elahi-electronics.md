@@ -1,0 +1,62 @@
+---
+layout: post
+title: Full SME ERP Solution — Elahi Electronics
+description: Architected and delivered a complete ERP solution for a Small & Medium Enterprise, spanning BI, CRM, SharePoint portals, and Silverlight-based rich client applications.
+date: '2026-04-12 09:30:00'
+tags: [ERP, Silverlight, SharePoint, SSAS, BizTalk]
+section: work
+image: /assets/content/work/sme-erp.svg
+image_alt: SME ERP Architecture
+permalink: /work/sme-erp-elahi-electronics/
+---
+
+## Context
+
+In mid-2009, Elahi Electronics — a growing SME in the electronics distribution space — needed a full Enterprise Resource Planning (ERP) system. Off-the-shelf ERP solutions were priced for enterprises, well beyond their budget. I was engaged to architect and build a custom ERP from the ground up, spanning customer management, orders, billing, vendor management, treasury, HR, and supply chain.
+
+The project ran for 18 months, from June 2009 through November 2010, with a small team that I led as Architect and Lead Developer.
+
+## Goal
+
+> Build a complete, custom ERP for an SME — from authentication to business intelligence — using the Microsoft stack.
+
+The ERP had to deliver:
+
+- Role-based authentication and authorization via SharePoint Forms-Based Authentication (FBA)
+- A rich client experience with Silverlight and WCF RIA Services
+- Enterprise search with FAST Search for SharePoint (FS4SP), including multi-language support
+- Business Intelligence with SQL Server Analysis Services (SSAS) cubes
+- Integration with Dynamics CRM, Dynamics AX, and MQSeries via BizTalk 2009
+- Smart Document tags that linked reports to live ERP data
+
+## Approach
+
+1. **Portal & Authentication**  
+   Built the ERP portal on SharePoint Server 2010. Implemented Forms-Based Authentication (FBA) with role-based access, ensuring that warehouse staff, sales, and finance each saw only their relevant modules.
+
+2. **Rich Client with Silverlight**  
+   Developed the primary client interface in Silverlight 4, using WCF RIA Services for client-server communication. The Silverlight client supported real-time data grids, drag-and-drop order assembly, and interactive dashboards — far beyond what was possible with ASP.NET WebForms at the time.
+
+3. **FAST Enterprise Search**  
+   Configured FAST Search for SharePoint (FS4SP) to index all ERP entities — customers, products, orders, invoices. Extended it with custom linguistics to translate product descriptions between English and regional languages. Integrated Smart Document Tags so that Word documents could pull live ERP data.
+
+4. **Business Intelligence**  
+   Built SSAS cubes for sales analysis, inventory turnover, and financial forecasting. SSIS packages handled ETL from the operational database to the data warehouse nightly.
+
+5. **Integration Fabric**  
+   BizTalk 2009 connected the ERP to Dynamics CRM (for sales), Dynamics AX (for finance), and MQSeries (for external partner communications).
+
+## Challenges
+
+- Silverlight's client-side processing model required careful data-loading strategies — eager loading caused UI freezes, lazy loading caused N+1 query problems.
+- FAST Search linguistics customization was poorly documented; extending keyword stemming and thesaurus for non-English languages required trial and error.
+- SSAS cube processing on the SME's modest hardware required aggressive partition strategies to keep processing windows under 2 hours.
+- The client's business processes evolved during development — the architecture had to absorb change without constant rewrites.
+
+## Outcome
+
+The ERP went into production serving 50+ concurrent users across sales, warehouse, finance, and management. The Silverlight client, while a technology that would later be deprecated by Microsoft, provided a genuinely modern experience in 2010. The FAST search integration reduced document retrieval time from minutes to sub-second queries.
+
+## Key takeaway
+
+**Building an ERP for an SME means building for evolution.** Unlike enterprise ERP rollouts with fixed requirements, an SME's processes change as they grow. Designing for extensibility — pluggable modules, metadata-driven forms, configurable workflows — was the difference between success and a permanent maintenance burden.

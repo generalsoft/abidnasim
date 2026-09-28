@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f4fa" />
+      <stop offset="100%" style="stop-color:#d4e0f0" />
+    </linearGradient>
+    <linearGradient id="nasaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0b3d91" />  <!-- NASA blue -->
+      <stop offset="100%" style="stop-color:#1b5bbf" />
+    </linearGradient>
+    <linearGradient id="siloGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7f8c8d" />
+      <stop offset="100%" style="stop-color:#95a5a6" />
+    </linearGradient>
+    <linearGradient id="sharepointGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50" />
+      <stop offset="100%" style="stop-color:#3e5a6c" />
+    </linearGradient>
+    <linearGradient id="centerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a5276" />
+      <stop offset="100%" style="stop-color:#2471a3" />
+    </linearGradient>
+    <linearGradient id="knowledgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#27ae60" />
+      <stop offset="100%" style="stop-color:#2ecc71" />
+    </linearGradient>
+    <!-- Shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+    <!-- Arrow markers -->
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0b3d91" />
+    </marker>
+    <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7f8c8d" />
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="720" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="500" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#0b3d91">NASA Knowledge Management Platform – SharePoint MOSS 2007 (Late 2008)</text>
+  <line x1="200" y1="55" x2="800" y2="55" stroke="#0b3d91" stroke-width="2" opacity="0.4"/>
+
+  <!-- ====== LEFT: Problem – Siloed Knowledge ====== -->
+  <rect x="30" y="90" width="260" height="340" rx="12" fill="#fdf2e9" stroke="#e67e22" stroke-width="2" filter="url(#shadow)"/>
+  <text x="160" y="120" text-anchor="middle" font-size="14" font-weight="bold" fill="#a04000">⚠️ The Problem: Knowledge Silos</text>
+  <line x1="50" y1="132" x2="270" y2="132" stroke="#e67e22" stroke-width="1" opacity="0.5"/>
+
+  <!-- Silo icons -->
+  <rect x="55" y="150" width="210" height="50" rx="6" fill="url(#siloGrad)"/>
+  <text x="160" y="170" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">💾 Individual Hard Drives</text>
+  <text x="160" y="188" text-anchor="middle" font-size="10" fill="#ecf0f1">Decentralized, unbacked</text>
+
+  <rect x="55" y="220" width="210" height="50" rx="6" fill="url(#siloGrad)"/>
+  <text x="160" y="240" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">📧 Email Archives</text>
+  <text x="160" y="258" text-anchor="middle" font-size="10" fill="#ecf0f1">Threads scattered, no search</text>
+
+  <rect x="55" y="290" width="210" height="50" rx="6" fill="url(#siloGrad)"/>
+  <text x="160" y="310" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">🧠 Retiring Engineers</text>
+  <text x="160" y="328" text-anchor="middle" font-size="10" fill="#ecf0f1">Decades of tacit knowledge</text>
+
+  <rect x="55" y="360" width="210" height="50" rx="6" fill="url(#siloGrad)"/>
+  <text x="160" y="380" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">📁 Local File Shares</text>
+  <text x="160" y="398" text-anchor="middle" font-size="10" fill="#ecf0f1">No version control, no taxonomy</text>
+
+  <!-- Cross marks between silos -->
+  <g stroke="#e67e22" stroke-width="2" opacity="0.5">
+    <line x1="300" y1="175" x2="320" y2="195"/>
+    <line x1="320" y1="175" x2="300" y2="195"/>
+    <line x1="300" y1="245" x2="320" y2="265"/>
+    <line x1="320" y1="245" x2="300" y2="265"/>
+    <line x1="300" y1="315" x2="320" y2="335"/>
+    <line x1="320" y1="315" x2="300" y2="335"/>
+    <line x1="300" y1="385" x2="320" y2="405"/>
+    <line x1="320" y1="385" x2="300" y2="405"/>
+  </g>
+
+  <!-- ====== CENTER: SharePoint Server 2007 (Your Solution) ====== -->
+  <rect x="340" y="160" width="320" height="200" rx="16" fill="url(#sharepointGrad)" filter="url(#shadow)" stroke="#1a252f" stroke-width="3"/>
+  <text x="500" y="195" text-anchor="middle" font-size="18" font-weight="bold" fill="#ffffff">🏛️ SharePoint Server 2007 (MOSS)</text>
+  <text x="500" y="220" text-anchor="middle" font-size="12" fill="#b8d4ff">Knowledge Management Platform</text>
+  <line x1="370" y1="232" x2="630" y2="232" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+  <text x="500" y="255" text-anchor="middle" font-size="12" fill="#d5e8fc">Sole Architect &amp; Developer</text>
+  <text x="500" y="280" text-anchor="middle" font-size="11" fill="#cde4fc">• Document libraries &amp; metadata</text>
+  <text x="500" y="300" text-anchor="middle" font-size="11" fill="#cde4fc">• Search &amp; content indexing</text>
+  <text x="500" y="320" text-anchor="middle" font-size="11" fill="#cde4fc">• Workflows &amp; retention policies</text>
+  <text x="500" y="340" text-anchor="middle" font-size="11" fill="#cde4fc">• Wiki &amp; expertise location</text>
+
+  <!-- Role badge -->
+  <rect x="430" y="370" width="140" height="28" rx="14" fill="#f39c12" filter="url(#shadow)"/>
+  <text x="500" y="389" text-anchor="middle" font-size="11" font-weight="bold" fill="#2c3e50">Your sole ownership</text>
+
+  <!-- Arrow from problem silos to solution -->
+  <path d="M 290 260 L 340 260" stroke="#e67e22" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrowGray)"/>
+  <text x="315" y="252" text-anchor="middle" font-size="9" fill="#e67e22">capture</text>
+
+  <!-- ====== RIGHT: NASA Centers (Distributed) ====== -->
+  <rect x="710" y="90" width="260" height="340" rx="12" fill="#e8f0fe" stroke="#0b3d91" stroke-width="2" filter="url(#shadow)"/>
+  <text x="840" y="120" text-anchor="middle" font-size="14" font-weight="bold" fill="#0b3d91">🌍 NASA Centers (Geographically Distributed)</text>
+  <line x1="730" y1="132" x2="950" y2="132" stroke="#0b3d91" stroke-width="1" opacity="0.4"/>
+
+  <!-- Center list -->
+  <rect x="735" y="150" width="210" height="30" rx="5" fill="url(#centerGrad)"/>
+  <text x="840" y="170" text-anchor="middle" font-size="11" fill="#fff">Marshall Space Flight Center (AL)</text>
+
+  <rect x="735" y="195" width="210" height="30" rx="5" fill="url(#centerGrad)"/>
+  <text x="840" y="215" text-anchor="middle" font-size="11" fill="#fff">Johnson Space Center (TX)</text>
+
+  <rect x="735" y="240" width="210" height="30" rx="5" fill="url(#centerGrad)"/>
+  <text x="840" y="260" text-anchor="middle" font-size="11" fill="#fff">Kennedy Space Center (FL)</text>
+
+  <rect x="735" y="285" width="210" height="30" rx="5" fill="url(#centerGrad)"/>
+  <text x="840" y="305" text-anchor="middle" font-size="11" fill="#fff">Goddard Space Flight Center (MD)</text>
+
+  <rect x="735" y="330" width="210" height="30" rx="5" fill="url(#centerGrad)"/>
+  <text x="840" y="350" text-anchor="middle" font-size="11" fill="#fff">Jet Propulsion Laboratory (CA)</text>
+
+  <rect x="735" y="375" width="210" height="30" rx="5" fill="url(#centerGrad)"/>
+  <text x="840" y="395" text-anchor="middle" font-size="11" fill="#fff">Ames Research Center (CA)</text>
+
+  <!-- Arrows from SharePoint to centers (sharing) -->
+  <path d="M 660 260 L 710 260" stroke="#0b3d91" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <text x="685" y="253" text-anchor="middle" font-size="9" fill="#0b3d91">access</text>
+
+  <!-- ====== BOTTOM: Knowledge Capture & Sharing Flow ====== -->
+  <rect x="180" y="480" width="640" height="70" rx="12" fill="url(#knowledgeGrad)" filter="url(#shadow)"/>
+  <text x="500" y="510" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">📚 Centralized Knowledge Repository – Institutional Memory Preserved</text>
+  <text x="500" y="535" text-anchor="middle" font-size="12" fill="#d5f5e3">Best practices · Mission documentation · Lessons learned · Expertise directory</text>
+
+  <!-- Arrows from SharePoint to bottom -->
+  <path d="M 500 360 L 500 480" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- ====== TIMESTAMP & IMPACT ====== -->
+  <text x="500" y="585" text-anchor="middle" font-size="12" fill="#5a6c7e">📅 Late 2008 – Enterprise rollout across all NASA centers</text>
+
+  <!-- Impact badges -->
+  <rect x="120" y="610" width="760" height="55" rx="10" fill="#fff" stroke="#0b3d91" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="500" y="634" text-anchor="middle" font-size="13" font-weight="bold" fill="#0b3d91">Key Outcomes – Breaking Down Silos, Preserving Critical Knowledge</text>
+  <text x="500" y="654" text-anchor="middle" font-size="11" fill="#2c3e50">✅ Single source of truth · ✅ Searchable institutional memory · ✅ Reduced risk from retiring workforce · ✅ Cross‑center collaboration</text>
+
+  <!-- Legend -->
+  <rect x="220" y="680" width="560" height="35" rx="6" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+  <rect x="240" y="690" width="15" height="10" fill="url(#siloGrad)" rx="2"/>
+  <text x="262" y="699" font-size="10" fill="#333">Legacy silos</text>
+  <rect x="380" y="690" width="15" height="10" fill="url(#sharepointGrad)" rx="2"/>
+  <text x="402" y="699" font-size="10" fill="#333">SharePoint MOSS 2007 (your solution)</text>
+  <rect x="600" y="690" width="15" height="10" fill="url(#centerGrad)" rx="2"/>
+  <text x="622" y="699" font-size="10" fill="#333">NASA centers</text>
+</svg>

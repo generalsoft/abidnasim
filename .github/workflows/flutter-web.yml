@@ -54,3 +54,40 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-regional-sites:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - region: pk
+            repo: generalsoft/nasim-pk
+            domain: nasim.pk
+          - region: us
+            repo: generalsoft/nasim-us
+            domain: nasim.us
+          - region: ae
+            repo: generalsoft/nasim-ae
+            domain: nasim.ae
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Assemble ${{ matrix.region }} site
+        run: |
+          mkdir -p staging/${{ matrix.region }}
+          if [ -d content/common ]; then
+            cp -r content/common/. staging/${{ matrix.region }}/
+          fi
+          cp -r content/${{ matrix.region }}/. staging/${{ matrix.region }}/
+
+      - name: Deploy ${{ matrix.region }} content
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.REGIONAL_SITES_PAT }}
+          external_repository: ${{ matrix.repo }}
+          publish_branch: main
+          publish_dir: staging/${{ matrix.region }}
+          cname: ${{ matrix.domain }}
+          keep_files: false

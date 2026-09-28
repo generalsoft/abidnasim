@@ -1,0 +1,30 @@
+theme: minima
+title: Abid Nasim
+description: Personal site of Abid Nasim (US)
+url: https://nasim.us
+lang: en
+timezone: America/Los_Angeles
+show_excerpts: false
+
+author:
+  name: Abid Nasim
+
+minima:
+  date_format: "%b %-d, %Y"
+
+# Labels used by the shared post layout (content/common/_layouts/post.html)
+section_labels:
+  work: Work
+  blog: Blog
+  hobby: Hobby
+
+header_pages:
+  - work.md
+  - blog.md
+  - hobby.md
+  - about.md
+  - contact.md
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap

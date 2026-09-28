@@ -1,0 +1,12 @@
+theme: minima
+title: عابد نسیم — پاکستان
+description: عابد نسیم کی ذاتی ویب سائٹ (پاکستان)
+lang: ur
+show_excerpts: false
+
+header_pages:
+  - about.md
+  - contact.md
+
+plugins:
+  - jekyll-seo-tag
