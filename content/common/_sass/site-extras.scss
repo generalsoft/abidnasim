@@ -67,3 +67,26 @@
   border-radius: 6px;
   margin: 0 0 1rem;
 }
+
+:root {
+  --bg: #ffffff;
+  --text: #222222;
+  --link: #0066cc;
+  --border: #dddddd;
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #eeeeee;
+  --link: #66b3ff;
+  --border: #444444;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--link);
+}
