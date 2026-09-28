@@ -8,8 +8,26 @@ permalink: /
 
 مطور • كاتب • مرشد
 
-<div class="page-images">
-  <img src="/assets/AN-Rotana.jpg" alt="عابد نسيم واقفاً">
+<div class="hero">
+
+  <div class="hero-content">
+
+    <h1>مرحباً، اسمي عابد نسيم</h1>
+
+    <p class="hero-subtitle">
+      أنا مهندس منصات متكامل.
+    </p>
+
+    ...
+  </div>
+
+  <div class="hero-image">
+    <img
+      src="{{ "/assets/AN-Rotana.jpg" | relative_url }}"
+      alt="عابد نسيم"
+    >
+  </div>
+
 </div>
 
 انظر صفحة [حول](/about/) للحصول على رمز QR لبطاقة التواصل
