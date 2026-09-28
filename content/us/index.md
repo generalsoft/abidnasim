@@ -1,39 +1,30 @@
 ---
-layout: home
-title: Home
+layout: page
+title: Hello, my name is Abid Nasim
+permalink: /
 ---
 
-<div class="hero">
+**I am a full stack Platform Engineer.**
 
-  <div class="hero-content">
+Developer • Writer • Mentor
 
-    <h1>Hello, my name is Abid Nasim</h1>
-
-    <p class="hero-subtitle">
-      I am a full stack Platform Engineer.
-    </p>
-
-    <div class="hero-roles">
-      <span>Developer</span>
-      <span>Writer</span>
-      <span>Mentor</span>
-    </div>
-
-    <p>
-      See <a href="{{ "/about/" | relative_url }}">About</a>
-      for my contact card QR code.
-    </p>
-
-  </div>
-
-  <div class="hero-image">
-    <img
-      src="{{ "/assets/AN-Rotana.jpg" | relative_url }}"
-      alt="Abid Nasim standing"
-    >
-  </div>
-
+<div class="page-images">
+  <img src="/assets/AN-Rotana.jpg" alt="Abid Nasim standing">
 </div>
+
+See [About](/about/) for my contact card QR code
+
+## Platform Engineer
+
+As a cross-platform developer, I have routinely integrated multiple Line of Business (LOB) applications. And I have migrated on-prem to cloud, many many times. Meanwhile, I enjoy writing code in more than one language.
+
+## Architect
+
+I have delivered over 30 projects. In nearly 50% of them, I had to propose an architecture and defend it. Defending your solution architecture is akin to defending for doctorate thesis, albeit perhaps less rigorous. Architecture is about important things. Lower latency or higher throughput? Data Integrity or Data Availability? Which of the dimensions are important among Time, Cost and Quality?
+
+## Project Management
+
+While I am at heart a techie, I am also a people person. I am a programmers' programmer. I understand you can suboptimize an organizational unit in order to optimize the enterprise.
 
 ### Selected Work
 

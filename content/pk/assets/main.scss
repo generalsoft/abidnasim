@@ -1,11 +1,28 @@
 ---
 ---
 @import "minima";
+@import "site-extras";
 
+// --- RTL (Arabic) ---
 html {
   direction: rtl;
 }
 
 .wrapper {
   text-align: right;
+}
+
+// minima uses physical left/right for blockquotes
+blockquote {
+  border-left: 0;
+  padding-left: 0;
+  border-right: 4px solid #e8e8e8;
+  padding-right: 15px;
+}
+
+// code stays left-to-right even on an RTL page
+pre,
+code {
+  direction: ltr;
+  text-align: left;
 }

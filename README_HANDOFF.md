@@ -44,3 +44,63 @@ Source: https://github.com/generalsoft/nasim-us (English files only; the `-ar` f
 - URLs are unchanged from the old site (`/work/<slug>/`, `/blog/<slug>/`, `/hobby/<slug>/`).
 - About page text kept verbatim, including the typos "discovererd" and "the the".
 - Not imported: contact form (Firebase config), theme toggle, carousel, Arabic pages.
+
+## Duplicate images resolved
+The 17 images used by both `content/ae` and `content/us` were identical, so
+they now live once in `content/common/assets/` (workflow merges common+region
+at deploy time, as it already did for `content/ae/assets/main.scss` RTL rules
+etc.). `content/ae/assets/` and `content/us/assets/` now hold only their own
+`main.scss`.
+
+## nasim.pk (Urdu) — translated, not imported
+`nasim.pk` had no existing source repo to pull from, so per your instruction
+this is a human-quality Urdu translation of the finished `content/us` English
+site (not machine-translated placeholder text):
+- `content/pk/_posts/` — all 13 posts (8 work, 4 blog, 1 hobby), same dates/
+  tags/images/permalinks as the English originals, titles and body text
+  translated into Urdu. Code blocks in the "IoT Saves the Day" post are left
+  as-is (code stays LTR per the RTL override in assets/main.scss).
+- `content/pk/{index,about,contact,work,blog,hobby}.md` — translated from
+  the `content/us` versions, including the About page's background story.
+- `content/pk/_config.yml` — lang: ur, timezone Asia/Karachi, Urdu section
+  labels and nav.
+- `content/pk/assets/main.scss` — same RTL overrides as `content/ae`.
+- Images: none duplicated — `content/pk` reuses `content/common/assets/`
+  directly (same image files as the English/Arabic sites).
+- One difference from `content/ae`/`content/us`: the contact email link uses
+  `abid@nasim.us` for consistency with those two, since no `.pk`-specific
+  address was given — flag if you want a different address for this domain.
+
+## Hero image layout (Rotana photo side-by-side)
+Synced from your repo's own `b36bbf5` commit and the preceding `07b17be`
+(light/dark theme toggle), both pulled from `generalsoft/abidnasim` HEAD:
+- `content/common/_sass/site-extras.scss` — now includes your `.hero` grid
+  rules (image on the right on desktop, stacks with image first on mobile
+  at 700px) and the full light/dark toggle CSS (`:root` variables, header/
+  footer theming) from `07b17be`.
+- `content/common/_includes/header.html`, `theme_toggle.html` — copied in
+  unchanged from your repo; these override minima's defaults to add the
+  toggle button.
+- `content/common/assets/icon/app_icon.png` — copied in from your repo.
+- `content/{ae,us,pk}/index.md` — all three now use the same `<div class="hero">`
+  markup as your `us/index.md`, each localized. Two things were fixed vs.
+  what was in your `ae/index.md` at HEAD: the `...` placeholder inside
+  `.hero-roles` was filled in with actual `<span>` role badges (مطوّر/كاتب/مرشد),
+  and the front matter was changed from `layout: page` to `layout: home` to
+  match `us`. I also removed the duplicate bold/role lines that were sitting
+  above the `<div class="hero">` block (leftover from before the hero was
+  added) and trimmed the old "مهندس منصات / مهندس الحلول / إدارة المشاريع"
+  paragraph sections below it, since `us/index.md` at HEAD no longer has the
+  equivalent English sections either — this was an assumption on my part to
+  match `us`'s current structure; say the word if you'd rather keep those
+  paragraphs on the Arabic landing page.
+- `content/pk/index.md` — built fresh with the same hero pattern (was a bare
+  placeholder in your repo, predating the Urdu translation work).
+- `content/pk/_config.yml` — brought up to the same completeness as
+  `ae`/`us` (url, timezone Asia/Karachi, author, date format, section
+  labels, header_pages) — your repo's `pk/_config.yml` was still the very
+  first placeholder version, since `pk`'s fuller build was never merged in
+  from an earlier zip.
+- Everything else in `content/us` and `content/ae` (about/contact/work/blog/
+  hobby, `_config.yml`, assets) matched your repo's HEAD exactly — nothing
+  else changed there.

@@ -1,10 +1,27 @@
 theme: minima
-title: عابد نسیم — پاکستان
+title: عابد نسیم
 description: عابد نسیم کی ذاتی ویب سائٹ (پاکستان)
+url: https://nasim.pk
 lang: ur
+timezone: Asia/Karachi
 show_excerpts: false
 
+author:
+  name: عابد نسیم
+
+minima:
+  date_format: "%Y-%m-%d"
+
+# Urdu labels used by the shared post layout (content/common/_layouts/post.html)
+section_labels:
+  work: کام
+  blog: بلاگ
+  hobby: مشاغل
+
 header_pages:
+  - work.md
+  - blog.md
+  - hobby.md
   - about.md
   - contact.md
 
