@@ -1,22 +1,52 @@
-<button id="theme-toggle" type="button" aria-label="Toggle dark mode">
-  🌙
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  type="button"
+  aria-label="Toggle dark mode"
+  title="Toggle dark mode">
+  <span class="theme-toggle-icon">☾</span>
 </button>
 
 <script>
 (function () {
   const button = document.getElementById("theme-toggle");
   const root = document.documentElement;
+  const icon = button.querySelector(".theme-toggle-icon");
 
-  const saved = localStorage.getItem("theme");
+  function applyTheme(theme) {
+    root.setAttribute("data-theme", theme);
+    icon.textContent = theme === "dark" ? "☀" : "☾";
 
-  if (saved) {
-    root.dataset.theme = saved;
+    button.setAttribute(
+      "aria-label",
+      theme === "dark"
+        ? "Switch to light mode"
+        : "Switch to dark mode"
+    );
+  }
+
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark" || savedTheme === "light") {
+    applyTheme(savedTheme);
+  } else {
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    applyTheme(prefersDark ? "dark" : "light");
   }
 
   button.addEventListener("click", function () {
-    const dark = root.dataset.theme !== "dark";
-    root.dataset.theme = dark ? "dark" : "light";
-    localStorage.setItem("theme", dark ? "dark" : "light");
+    const current =
+      root.getAttribute("data-theme") === "dark"
+        ? "dark"
+        : "light";
+
+    const next = current === "dark" ? "light" : "dark";
+
+    localStorage.setItem("theme", next);
+    applyTheme(next);
   });
 })();
 </script>
