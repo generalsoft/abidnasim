@@ -36,9 +36,6 @@ const Map<String, String> stringsAr = {
   // Work
   'work_eyebrow': 'أعمال مختارة',
   'work_title': 'على مدى أكثر من 30 عامًا\nقمت بتنفيذ مشاريع مثل:',
-  'work_placeholder_label': 'المشاريع',
-  'work_placeholder_heading': 'قريبًا...',
-  'work_placeholder_desc': 'مشاريع، شركات، منتجات، إنجازات، ودراسات حالة.',
 
   // About
   'about_eyebrow': 'نبذة',

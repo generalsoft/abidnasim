@@ -36,9 +36,6 @@ const Map<String, String> stringsUr = {
   // Work
   'work_eyebrow': 'منتخب کام',
   'work_title': '30 سال سے زائد عرصے میں\nمیں نے یہ منصوبے مکمل کیے ہیں:',
-  'work_placeholder_label': 'منصوبے',
-  'work_placeholder_heading': 'جلد آ رہا ہے...',
-  'work_placeholder_desc': 'منصوبے، کمپنیاں، مصنوعات، کامیابیاں اور کیس اسٹڈیز۔',
 
   // About
   'about_eyebrow': 'تعارف',

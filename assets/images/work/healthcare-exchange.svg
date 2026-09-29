@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#eaf6fc" />
+      <stop offset="100%" style="stop-color:#cde4f0" />
+    </linearGradient>
+    <linearGradient id="carrierGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50" />
+      <stop offset="100%" style="stop-color:#1a252f" />
+    </linearGradient>
+    <linearGradient id="crmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0b3d5f" />
+      <stop offset="100%" style="stop-color:#1a6d8f" />
+    </linearGradient>
+    <linearGradient id="exchangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007847" />  <!-- Oregon green -->
+      <stop offset="100%" style="stop-color:#00a86b" />
+    </linearGradient>
+    <linearGradient id="ediGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8431d" />
+      <stop offset="100%" style="stop-color:#d35400" />
+    </linearGradient>
+    <linearGradient id="hipaaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c3483" />
+      <stop offset="100%" style="stop-color:#8e44ad" />
+    </linearGradient>
+    <!-- Shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-opacity="0.15"/>
+    </filter>
+    <!-- Arrow markers -->
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#007847" />
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1a6d8f" />
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8e44ad" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="720" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="500" y="40" text-anchor="middle" font-size="20" font-weight="bold" fill="#0b2b26">Oregon Health Insurance Exchange – ACA Implementation (2013)</text>
+  <line x1="200" y1="52" x2="800" y2="52" stroke="#007847" stroke-width="2" opacity="0.5"/>
+
+  <!-- ====== TOP: Consumer-facing portal (Dynamics CRM) ====== -->
+  <rect x="320" y="75" width="360" height="95" rx="12" fill="url(#crmGrad)" filter="url(#shadow)"/>
+  <text x="500" y="105" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">🖥️ Consumer‑Facing Portal</text>
+  <text x="500" y="128" text-anchor="middle" font-size="12" fill="#b8e2f2">Microsoft Dynamics CRM Backend</text>
+  <text x="500" y="150" text-anchor="middle" font-size="11" fill="#cde4fc">Plan comparison · Enrollment · Eligibility · Account management</text>
+
+  <!-- Icons for users -->
+  <g transform="translate(710, 95)">
+    <circle cx="15" cy="10" r="8" fill="#fff" opacity="0.8"/>
+    <circle cx="40" cy="10" r="8" fill="#fff" opacity="0.8"/>
+    <text x="70" y="14" font-size="11" fill="#fff">Consumers &amp; Small Biz</text>
+  </g>
+
+  <!-- ====== MIDDLE: Exchange Core Platform (your work) ====== -->
+  <rect x="280" y="210" width="440" height="170" rx="16" fill="url(#exchangeGrad)" filter="url(#shadow)" stroke="#005c3e" stroke-width="3"/>
+  <text x="500" y="245" text-anchor="middle" font-size="18" font-weight="bold" fill="#ffffff">🏛️ Oregon Health Insurance Exchange</text>
+  <text x="500" y="270" text-anchor="middle" font-size="12" fill="#d5f5e3">(Modern Cloud‑Enabled Platform – Designed &amp; Built by You)</text>
+  <line x1="310" y1="282" x2="690" y2="282" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+
+  <!-- Key components -->
+  <rect x="305" y="298" width="120" height="30" rx="6" fill="#ffffff" opacity="0.2"/>
+  <text x="365" y="318" text-anchor="middle" font-size="11" fill="#fff">Eligibility Engine</text>
+
+  <rect x="440" y="298" width="120" height="30" rx="6" fill="#ffffff" opacity="0.2"/>
+  <text x="500" y="318" text-anchor="middle" font-size="11" fill="#fff">Plan Management</text>
+
+  <rect x="575" y="298" width="120" height="30" rx="6" fill="#ffffff" opacity="0.2"/>
+  <text x="635" y="318" text-anchor="middle" font-size="11" fill="#fff">Enrollment Hub</text>
+
+  <rect x="305" y="340" width="120" height="30" rx="6" fill="#ffffff" opacity="0.2"/>
+  <text x="365" y="360" text-anchor="middle" font-size="11" fill="#fff">Financial Mgmt</text>
+
+  <rect x="440" y="340" width="120" height="30" rx="6" fill="#ffffff" opacity="0.2"/>
+  <text x="500" y="360" text-anchor="middle" font-size="11" fill="#fff">Reporting &amp; Analytics</text>
+
+  <!-- ====== RIGHT: Multiple Insurance Carriers ====== -->
+  <rect x="760" y="210" width="210" height="170" rx="12" fill="url(#carrierGrad)" filter="url(#shadow)"/>
+  <text x="865" y="240" text-anchor="middle" font-size="14" font-weight="bold" fill="#ecf0f1">🏢 Insurance Carriers</text>
+  <line x1="780" y1="252" x2="950" y2="252" stroke="#7f8c8d" stroke-width="1" opacity="0.5"/>
+
+  <text x="865" y="278" text-anchor="middle" font-size="12" fill="#ecf0f1">Carrier A</text>
+  <text x="865" y="298" text-anchor="middle" font-size="12" fill="#ecf0f1">Carrier B</text>
+  <text x="865" y="318" text-anchor="middle" font-size="12" fill="#ecf0f1">Carrier C</text>
+  <text x="865" y="338" text-anchor="middle" font-size="12" fill="#ecf0f1">...</text>
+  <text x="865" y="362" text-anchor="middle" font-size="10" fill="#bdc3c7" font-style="italic">HIPAA‑compliant integration</text>
+
+  <!-- ====== LEFT: Legacy 5010 EDI (being replaced) ====== -->
+  <rect x="20" y="210" width="220" height="170" rx="12" fill="#fdedec" stroke="url(#ediGrad)" stroke-width="2" filter="url(#shadow)"/>
+  <text x="130" y="240" text-anchor="middle" font-size="14" font-weight="bold" fill="#a8431d">⚠️ Legacy System</text>
+  <text x="130" y="260" text-anchor="middle" font-size="12" fill="#c0392b">5010 EDI Processing</text>
+  <line x1="40" y1="272" x2="220" y2="272" stroke="#e74c3c" stroke-width="1" opacity="0.4"/>
+  <text x="130" y="295" text-anchor="middle" font-size="10" fill="#333">Batch files · AS2</text>
+  <text x="130" y="315" text-anchor="middle" font-size="10" fill="#333">Fixed transaction sets</text>
+  <text x="130" y="335" text-anchor="middle" font-size="10" fill="#333">No real‑time eligibility</text>
+  <text x="130" y="355" text-anchor="middle" font-size="10" fill="#e74c3c" font-weight="bold">✗ Replaced by cloud platform</text>
+
+  <!-- Arrow from legacy to exchange (being replaced) -->
+  <line x1="240" y1="295" x2="280" y2="295" stroke="#e74c3c" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrowGreen)" opacity="0.6"/>
+
+  <!-- Arrow from portal to exchange -->
+  <line x1="500" y1="170" x2="500" y2="210" stroke="#1a6d8f" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- Arrow from exchange to carriers -->
+  <line x1="720" y1="295" x2="760" y2="295" stroke="#007847" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- ====== BOTTOM: HIPAA Security Layer ====== -->
+  <rect x="180" y="430" width="640" height="65" rx="10" fill="url(#hipaaGrad)" filter="url(#shadow)"/>
+  <text x="500" y="458" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">🔒 HIPAA‑Protected Transaction Layer</text>
+  <text x="500" y="480" text-anchor="middle" font-size="11" fill="#e8daef">Encryption at rest &amp; in transit · Audit logging · Role‑based access · PHI redaction</text>
+
+  <!-- Arrow from exchange to HIPAA layer -->
+  <line x1="500" y1="380" x2="500" y2="430" stroke="#8e44ad" stroke-width="2.5" marker-end="url(#arrowPurple)"/>
+
+  <!-- ====== OREGON STATE CONTEXT ====== -->
+  <rect x="280" y="520" width="440" height="70" rx="12" fill="#fff" stroke="#007847" stroke-width="2" filter="url(#shadow)"/>
+  <text x="500" y="550" text-anchor="middle" font-size="14" font-weight="bold" fill="#0b3d5f">🏛️ State of Oregon – Healthcare Marketplace</text>
+  <text x="500" y="574" text-anchor="middle" font-size="11" fill="#2c3e50">Mandated by Affordable Care Act (ACA) · Serving individuals &amp; small businesses</text>
+
+  <!-- Arrow connecting exchange to state -->
+  <line x1="500" y1="380" x2="500" y2="520" stroke="#007847" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowGreen)" opacity="0.7"/>
+
+  <!-- ====== TIMESTAMP & ROLE ====== -->
+  <text x="500" y="625" text-anchor="middle" font-size="12" fill="#5a6c7e">📅 2013 – Design &amp; Build of Oregon's ACA Health Insurance Exchange</text>
+
+  <!-- Legend -->
+  <rect x="150" y="650" width="700" height="55" rx="8" fill="#f8f9fa" stroke="#ccc" stroke-width="1" filter="url(#shadow)"/>
+  <text x="500" y="672" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Legend</text>
+  <rect x="220" y="682" width="16" height="12" fill="url(#crmGrad)" rx="2"/>
+  <text x="242" y="692" font-size="10" fill="#333">Dynamics CRM Portal</text>
+  <rect x="380" y="682" width="16" height="12" fill="url(#exchangeGrad)" rx="2"/>
+  <text x="402" y="692" font-size="10" fill="#333">Exchange Core (your work)</text>
+  <rect x="560" y="682" width="16" height="12" fill="url(#carrierGrad)" rx="2"/>
+  <text x="582" y="692" font-size="10" fill="#333">Insurance Carriers</text>
+  <rect x="710" y="682" width="16" height="12" fill="url(#ediGrad)" rx="2"/>
+  <text x="732" y="692" font-size="10" fill="#333">Legacy 5010 EDI (replaced)</text>
+</svg>
