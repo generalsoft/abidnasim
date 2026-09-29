@@ -1,0 +1,16 @@
+{%- comment -%}
+  Google Tag Manager (head snippet).
+  Overrides minima's own empty _includes/custom-head.html placeholder —
+  this is minima's supported customization hook, included automatically
+  from _includes/head.html, so nothing else about <head> is touched.
+  Each region sets its own container ID via `gtm_id` in _config.yml.
+{%- endcomment -%}
+{%- if site.gtm_id -%}
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{ site.gtm_id }}');</script>
+<!-- End Google Tag Manager -->
+{%- endif -%}

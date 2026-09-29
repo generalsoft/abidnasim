@@ -6,6 +6,9 @@ lang: en
 timezone: America/Los_Angeles
 show_excerpts: false
 
+# Google Tag Manager — "AN - nasim.us" container
+gtm_id: GTM-N542H9XX
+
 author:
   name: Abid Nasim
 

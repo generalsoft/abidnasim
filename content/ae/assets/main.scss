@@ -1,5 +1,7 @@
 ---
 ---
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
 @import "minima";
 @import "site-extras";
 
@@ -25,4 +27,25 @@ pre,
 code {
   direction: ltr;
   text-align: left;
+}
+
+// Cairo — a Google Fonts, OFL-licensed Arabic+Latin typeface (Mohamed
+// Gaber's extension of Titillium Web into Arabic, Kufi-influenced). Chosen
+// as a modern, legitimately-licensed substitute for Dubai: Dubai isn't on
+// Google Fonts and its license explicitly disallows redistributing the
+// font files, so it can't be self-hosted or bundled into this repo.
+body {
+  font-family: 'Cairo', 'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6,
+.site-title {
+  font-family: 'Cairo', 'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+}
+
+.post-content p,
+.page-content p {
+  margin-bottom: 1.3em;
 }

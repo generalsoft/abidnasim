@@ -1,4 +1,18 @@
 ---
 ---
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap');
+
 @import "minima";
 @import "site-extras";
+
+// Public Sans for body text, Rubik for headings — both support the
+// reader-tools font-size scaling since they're set in rem/em throughout
+// minima's own stylesheet.
+body {
+  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.site-title {
+  font-family: 'Rubik', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}

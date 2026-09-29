@@ -6,6 +6,9 @@ lang: ur
 timezone: Asia/Karachi
 show_excerpts: false
 
+# Google Tag Manager — "AN - nasim.pk" container
+gtm_id: GTM-T6QNJBJ4
+
 author:
   name: عابد نسیم
 
