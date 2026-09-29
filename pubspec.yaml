@@ -16,6 +16,12 @@ dependencies:
   # Renders the SVG diagrams used in the work/projects section.
   flutter_svg: ^2.0.10+1
 
+  # Talks to the Firestore REST API for the contact form — see
+  # lib/services/contact_service.dart. Chosen over the Firebase JS SDK so the
+  # send path is plain Dart (unit-testable on the VM) and needs no web-only
+  # interop.
+  http: ^1.6.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

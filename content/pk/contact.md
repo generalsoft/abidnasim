@@ -6,6 +6,8 @@ permalink: /contact/
 
 مجھے آپ سے سن کر خوشی ہوگی۔
 
+{% include contact_form.html %}
+
 ## ای میل
 
 [abid@nasim.us](mailto:abid@nasim.us)

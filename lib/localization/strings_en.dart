@@ -57,6 +57,20 @@ const Map<String, String> stringsEn = {
   'contact_email': 'Email',
   'contact_phone': 'Phone',
   'contact_whatsapp': 'WhatsApp',
+  'contact_form_heading': 'Send a message',
+  'contact_form_name': 'Name',
+  'contact_form_email': 'Email',
+  'contact_form_message': 'Message',
+  'contact_form_submit': 'Send message',
+  'contact_form_sending': 'Sending…',
+  'contact_form_required': 'This field is required',
+  'contact_form_invalid_email': 'Enter a valid email address',
+  'contact_form_success':
+      'Thank you — your message is on its way. I will reply to the email address you gave.',
+  'contact_form_error':
+      'The message could not be sent. Please try again, or use the email / WhatsApp buttons above.',
+  'contact_form_unavailable':
+      'The form is not available in this build. Please use the email or WhatsApp buttons above.',
 
   // Footer
   'footer_brand': 'ABID NASIM',

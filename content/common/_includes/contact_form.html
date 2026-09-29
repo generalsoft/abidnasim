@@ -1,0 +1,104 @@
+{%- comment -%}
+  Contact form → Firestore. Shared by nasim.pk / nasim.us / nasim.ae (merged in
+  from content/common at deploy time). Include it from a region's contact.md:
+
+      {% include contact_form.html %}
+
+  It writes the same document shape as the Flutter app's contact form
+  (lib/services/contact_service.dart) into the same collection, so every surface
+  feeds one inbox:
+
+      name, email, message, source, locale, pageUrl, createdAt
+
+  The Firebase config is NOT committed. The deploy workflow writes
+  `assets/js/firebase-config.js` (window.FIREBASE_CONFIG) from the
+  PUBLIC_FIREBASE_* secrets just before `jekyll build`; locally, create that
+  file yourself (see .env.example). Without it the form renders disabled with
+  the "unavailable" message — a build without secrets degrades to the email
+  links instead of pretending to send.
+
+  Wording comes from `contact_form:` in each region's _config.yml, with
+  English fallbacks here so the form is never blank.
+{%- endcomment -%}
+{%- assign form = site.contact_form -%}
+<form
+  class="contact-form"
+  id="contact-form"
+  novalidate
+  data-source="{{ form.source | default: site.title | escape }}"
+  data-locale="{{ site.lang | default: 'en' }}"
+  data-collection="{{ form.collection | default: 'contacts' }}"
+  data-sending-label="{{ form.sending_label | default: 'Sending…' | escape }}"
+  data-required-message="{{ form.required_message | default: 'This field is required' | escape }}"
+  data-invalid-email-message="{{ form.invalid_email_message | default: 'Enter a valid email address' | escape }}"
+  data-success-message="{{ form.success_message | default: 'Thank you — your message is on its way.' | escape }}"
+  data-error-message="{{ form.error_message | default: 'The message could not be sent. Please try again.' | escape }}"
+  data-unavailable-message="{{ form.unavailable_message | default: 'The form is not available right now.' | escape }}">
+
+  <h2 class="contact-form-heading">{{ form.heading | default: 'Send a message' }}</h2>
+
+  <div class="contact-form-row">
+
+    <div class="contact-form-field">
+      <label for="contact-name">{{ form.name_label | default: 'Name' }}</label>
+      <input
+        id="contact-name"
+        name="name"
+        type="text"
+        autocomplete="name"
+        maxlength="80"
+        required
+        aria-describedby="contact-name-error">
+      <span class="contact-form-field-error" id="contact-name-error" aria-live="polite"></span>
+    </div>
+
+    <div class="contact-form-field">
+      <label for="contact-email">{{ form.email_label | default: 'Email' }}</label>
+      <input
+        id="contact-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        maxlength="160"
+        required
+        aria-describedby="contact-email-error">
+      <span class="contact-form-field-error" id="contact-email-error" aria-live="polite"></span>
+    </div>
+
+  </div>
+
+  <div class="contact-form-field">
+    <label for="contact-message">{{ form.message_label | default: 'Message' }}</label>
+    <textarea
+      id="contact-message"
+      name="message"
+      rows="6"
+      maxlength="2000"
+      required
+      aria-describedby="contact-message-error"></textarea>
+    <span class="contact-form-field-error" id="contact-message-error" aria-live="polite"></span>
+  </div>
+
+  {%- comment -%}
+    Honeypot: hidden from people, filled by naive bots, which then get the
+    success message and no write (see contact-form.js).
+  {%- endcomment -%}
+  <div class="contact-form-honeypot" aria-hidden="true">
+    <label for="contact-company">Company</label>
+    <input id="contact-company" name="company" type="text" tabindex="-1" autocomplete="off">
+  </div>
+
+  <p class="contact-form-actions">
+    <button type="submit" class="contact-form-submit">{{ form.submit_label | default: 'Send message' }}</button>
+  </p>
+
+  <p class="contact-form-status" role="status" aria-live="polite"></p>
+
+  <noscript>
+    <p class="contact-form-noscript">{{ form.unavailable_message | default: 'The form is not available right now.' }}</p>
+  </noscript>
+
+</form>
+
+<script src="{{ '/assets/js/firebase-config.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/contact-form.js' | relative_url }}" defer></script>

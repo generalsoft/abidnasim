@@ -21,6 +21,22 @@ section_labels:
   blog: بلاگ
   hobby: مشاغل
 
+# Contact form (content/common/_includes/contact_form.html). Wording mirrors the
+# Flutter app's contact form (lib/localization/strings_ur.dart).
+contact_form:
+  source: "nasim.pk"
+  heading: "پیغام بھیجیں"
+  name_label: "نام"
+  email_label: "ای میل"
+  message_label: "پیغام"
+  submit_label: "پیغام بھیجیں"
+  sending_label: "بھیجا جا رہا ہے…"
+  required_message: "یہ خانہ پُر کرنا ضروری ہے"
+  invalid_email_message: "درست ای میل پتہ درج کریں"
+  success_message: "شکریہ — آپ کا پیغام بھیج دیا گیا ہے۔ میں آپ کے دیے گئے ای میل پتے پر جواب دوں گا۔"
+  error_message: "پیغام نہیں بھیجا جا سکا۔ براہِ کرم دوبارہ کوشش کریں یا اوپر دیے گئے ای میل / واٹس ایپ روابط استعمال کریں۔"
+  unavailable_message: "یہ فارم اس وقت دستیاب نہیں ہے۔ براہِ کرم اوپر دیے گئے ای میل یا واٹس ایپ روابط استعمال کریں۔"
+
 header_pages:
   - work.md
   - blog.md

@@ -21,6 +21,22 @@ section_labels:
   blog: المدونة
   hobby: الهوايات
 
+# Contact form (content/common/_includes/contact_form.html). Wording mirrors the
+# Flutter app's contact form (lib/localization/strings_ar.dart).
+contact_form:
+  source: "nasim.ae"
+  heading: "أرسل رسالة"
+  name_label: "الاسم"
+  email_label: "البريد الإلكتروني"
+  message_label: "الرسالة"
+  submit_label: "إرسال الرسالة"
+  sending_label: "جارٍ الإرسال…"
+  required_message: "هذا الحقل مطلوب"
+  invalid_email_message: "أدخل بريدًا إلكترونيًا صحيحًا"
+  success_message: "شكرًا لك — تم إرسال رسالتك. سأرد على البريد الإلكتروني الذي أدخلته."
+  error_message: "تعذّر إرسال الرسالة. حاول مرة أخرى، أو استخدم روابط البريد الإلكتروني / واتساب في الأعلى."
+  unavailable_message: "النموذج غير متاح حاليًا. يُرجى استخدام روابط البريد الإلكتروني أو واتساب في الأعلى."
+
 header_pages:
   - work.md
   - blog.md

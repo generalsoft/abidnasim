@@ -6,6 +6,8 @@ permalink: /contact/
 
 يسعدني أن أسمع منك.
 
+{% include contact_form.html %}
+
 ## البريد الإلكتروني
 
 [abid@nasim.us](mailto:abid@nasim.us)
