@@ -4,10 +4,12 @@ import '../constants/site_constants.dart';
 import '../localization/app_localizations.dart';
 import '../services/analytics_service.dart';
 import '../services/url_launcher_service.dart';
+import 'contact_form.dart';
 import 'shared/buttons.dart';
 import 'shared/content_section.dart';
 
-/// "Contact" section: email, phone, and WhatsApp actions.
+/// "Contact" section: the message form, plus email / phone / WhatsApp as the
+/// direct channels (and as the fallback when the form can't be used).
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
 
@@ -56,6 +58,8 @@ class ContactSection extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 44),
+          const ContactForm(),
         ],
       ),
     );

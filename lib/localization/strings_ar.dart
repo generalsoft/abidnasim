@@ -56,6 +56,19 @@ const Map<String, String> stringsAr = {
   'contact_email': 'البريد الإلكتروني',
   'contact_phone': 'الهاتف',
   'contact_whatsapp': 'واتساب',
+  'contact_form_heading': 'أرسل رسالة',
+  'contact_form_name': 'الاسم',
+  'contact_form_email': 'البريد الإلكتروني',
+  'contact_form_message': 'الرسالة',
+  'contact_form_submit': 'إرسال الرسالة',
+  'contact_form_sending': 'جارٍ الإرسال…',
+  'contact_form_required': 'هذا الحقل مطلوب',
+  'contact_form_invalid_email': 'أدخل بريدًا إلكترونيًا صحيحًا',
+  'contact_form_success': 'شكرًا لك — تم إرسال رسالتك. سأرد على البريد الإلكتروني الذي أدخلته.',
+  'contact_form_error':
+      'تعذّر إرسال الرسالة. حاول مرة أخرى، أو استخدم أزرار البريد الإلكتروني / واتساب في الأعلى.',
+  'contact_form_unavailable':
+      'النموذج غير متاح في هذا الإصدار. يُرجى استخدام زرّي البريد الإلكتروني أو واتساب في الأعلى.',
 
   // Footer
   'footer_brand': 'عابد نسيم',

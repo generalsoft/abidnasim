@@ -21,6 +21,22 @@ section_labels:
   blog: Blog
   hobby: Hobby
 
+# Contact form (content/common/_includes/contact_form.html). Wording mirrors the
+# Flutter app's contact form (lib/localization/strings_en.dart).
+contact_form:
+  source: "nasim.us"
+  heading: "Send a message"
+  name_label: "Name"
+  email_label: "Email"
+  message_label: "Message"
+  submit_label: "Send message"
+  sending_label: "Sending…"
+  required_message: "This field is required"
+  invalid_email_message: "Enter a valid email address"
+  success_message: "Thank you — your message is on its way. I will reply to the email address you gave."
+  error_message: "The message could not be sent. Please try again, or use the email / WhatsApp links above."
+  unavailable_message: "The form is not available right now. Please use the email or WhatsApp links above."
+
 header_pages:
   - work.md
   - blog.md

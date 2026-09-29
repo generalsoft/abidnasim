@@ -9,11 +9,18 @@ node_modules
 .DS_Store
 Thumbs.db
 
-# Env
+# env
 .env
 .env.*
 !.env.example
 !.env.test
+
+# Firebase client config for the regional contact form: generated per region at
+# build time from the PUBLIC_FIREBASE_* secrets (see .env.example), never
+# committed. (`firestore.rules` is *not* ignored — it holds no secrets and is the
+# file you deploy with `firebase deploy --only firestore:rules`.)
+firebase-config.js
+firestore.rules
 
 # Vite
 vite.config.js.timestamp-*
@@ -29,3 +36,6 @@ Gemfile.lock
 
 # temp
 lib/main_backup.dart
+
+# Python bytecode (scripts/)
+__pycache__/

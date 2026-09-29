@@ -17,6 +17,19 @@ Builds/deploys the Flutter site, then pushes each region (common + region folder
 to generalsoft/nasim-{pk,us,ae} using the `REGIONAL_SITES_PAT` secret.
 
 ## Still open
+- **Delete the contact-form test rows** in the Firebase console (`contacts`) — the
+  rules (by design) allow no client deletes, so a rules-verification run always
+  leaves its test documents behind. They are named "Cline rules check",
+  "Cline validation test", "Dart client probe", plus one early probe whose only
+  field is a name of "x" (ids: 2tmTjQAWhGOqhAww68Kn, w6iZBbD0h7QC5IhnVSt7,
+  ELN7nRzzclWEyLUiFqky, jT6Uk1P4S9sOxSiTdKnu, QvhEWk2hJT2CVLMp8Xo9,
+  fcwM9O4jxTuUvVGZ87SY).
+- Push to `main` so CI rebuilds the app and the three sites with the six
+  `PUBLIC_FIREBASE_*` secrets. They have to exist for the form to be enabled; a
+  build without them emits a `::warning::` and renders the forms disabled.
+- Optional hardening: restrict the Firebase API key in Google Cloud (Firestore
+  API + your referrers), and/or move `createdAt` to a server-set timestamp via
+  the Firestore `:commit` endpoint so it can't be forged.
 - `services/url_launcher_service.dart` `openUrl()` is still a placeholder: buttons track
   analytics but don't navigate yet.
 - Persist selected language between visits.
@@ -196,6 +209,155 @@ wasm dry run.
 - `test/widget_test.dart` — replaced the stale "counter increments" template
   (it referenced a `MyApp` class that doesn't exist, so it never compiled) with a
   home-page smoke test.
+
+## Contact form (Flutter + the three regional sites)
+The contact form that was deliberately skipped in the earlier imports is now in
+all four surfaces, writing into **one Firestore collection** so submissions land
+in a single place:
+
+| Surface | Form | Sends as |
+| --- | --- | --- |
+| abidnasim.com (Flutter web) | `lib/widgets/contact_form.dart` → `lib/services/contact_service.dart` | `source: abidnasim-com-app` |
+| nasim.us / nasim.pk / nasim.ae | `content/common/_includes/contact_form.html` → `content/common/assets/js/contact-form.js` | `source: nasim.us` / `nasim.pk` / `nasim.ae` |
+
+**Firestore contract** — `POST /v1/projects/{projectId}/databases/(default)/documents/contacts?key={apiKey}`
+with the typed fields `name`, `email`, `message`, `source`, `locale`, `pageUrl`,
+`createdAt` (ISO-8601 UTC). The collection is **`contacts`** — the one the project
+already had rules for. Both implementations build byte-identical payloads, so a
+change to the shape has to be made in all three places: the Dart service, the
+site JS, and `firestore.rules` (each file's header comment says so).
+
+### 1. Apply the tightened security rules
+The project was running `match /contacts/{docId} { allow create: if true; }`:
+create-only, which is the right instinct, but it accepted *any* document shape
+and said nothing about reads. `firestore.rules` (repo root) keeps create-only and
+adds:
+
+- a closed field list (`hasOnly` + `hasAll`), so the collection can't be reused
+  as general-purpose storage or a relay;
+- type and size checks per field, matching the limits the forms enforce
+  (name ≤ 80, e-mail ≤ 160 and must look like an address, message ≤ 2000,
+  pageUrl ≤ 500, `createdAt` must look like an ISO-8601 UTC timestamp);
+- `source` whitelisted to the four surfaces that exist
+  (`abidnasim-com-app`, `nasim.pk`, `nasim.us`, `nasim.ae`) and `locale` to
+  `en` / `ur` / `ar`;
+- reads, updates and deletes denied for clients — submissions are read in the
+  Firebase console, so a leaked API key can't scrape or wipe the inbox;
+- an explicit closed catch-all, so a future broad `allow` has to be deliberate.
+
+Deploy it with Firebase console → Firestore Database → Rules, or
+`firebase deploy --only firestore:rules`. Then verify with a real
+submission-shaped request — `200` means the rules are live and the form works:
+
+```bash
+set -a; . ./.env; set +a
+curl -s -o /dev/null -w '%{http_code}\n' -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"fields":{"name":{"stringValue":"rule check"},"email":{"stringValue":"me@abidnasim.com"},"message":{"stringValue":"hello"},"source":{"stringValue":"nasim.us"},"locale":{"stringValue":"en"},"pageUrl":{"stringValue":"https://nasim.us/contact/"},"createdAt":{"stringValue":"2026-01-01T00:00:00.000Z"}}}' \
+  "https://firestore.googleapis.com/v1/projects/$PUBLIC_FIREBASE_PROJECT_ID/databases/(default)/documents/contacts?key=$PUBLIC_FIREBASE_API_KEY"
+```
+
+A `403` on that request means the tightened rules aren't deployed yet. (A `403`
+from a body missing `message`, or with an extra field, means they *are* — that's
+the request the old `if true` allowed and the new one rejects; note such a probe
+writes nothing.)
+
+Independent of the rules: restrict the Firebase API key in the Google Cloud
+console (Credentials → API restrictions: Cloud Firestore API; Application
+restrictions: your three domains + localhost). The key ships in public
+JavaScript, so pinning it to the API and the referrers removes the easiest abuse
+path.
+
+### 2. The six secrets
+`.github/workflows/flutter-web.yml` reads, in both jobs:
+`PUBLIC_FIREBASE_API_KEY`, `PUBLIC_FIREBASE_AUTH_DOMAIN`,
+`PUBLIC_FIREBASE_PROJECT_ID`, `PUBLIC_FIREBASE_STORAGE_BUCKET`,
+`PUBLIC_FIREBASE_MESSAGING_SENDER_ID`, `PUBLIC_FIREBASE_APP_ID`.
+
+- **build job** — passes them to `flutter build web --release` as
+  `--dart-define` flags; `lib/constants/firebase_config.dart` reads them with
+  `String.fromEnvironment`. A "Check Firebase secrets" step emits a
+  `::warning::` when any are missing instead of failing the deploy.
+- **deploy-regional-sites job** — writes
+  `staging/<region>/assets/js/firebase-config.js` (`window.FIREBASE_CONFIG`)
+  after the site is assembled and before `jekyll build`, because Jekyll can't
+  read environment variables. That file is git-ignored.
+
+The client config is public by design (it's in the shipped JS either way); the
+rules are what protect the collection. The Flutter app's REST write only needs
+`apiKey` + `projectId` — the other four are carried through for parity, so a
+future switch to the Firebase JS SDK needs no workflow change (and unused
+constants are tree-shaken out of `main.dart.js`).
+
+### 3. Local development
+```bash
+cp .env.example .env          # then paste your real values
+flutter run -d chrome --dart-define-from-file=.env
+flutter build web --release --dart-define-from-file=.env
+```
+For local Jekyll builds, drop the same values into the git-ignored
+`content/<region>/assets/js/firebase-config.js`.
+
+**Degrading gracefully:** with no config at all (a fresh clone, or CI before the
+secrets exist) the Flutter form renders with its fields disabled and an inline
+note, and the sites' form does the same via `contact-form.js` — both point the
+visitor at the email / WhatsApp links instead of failing after they've typed a
+message.
+
+### 4. Behaviour and spam
+- Both forms validate name/e-mail/message locally, submit with the button in a
+  "sending…" state, report success or failure inline (with `aria-live`), clear
+  the fields on success, and keep what was typed on failure.
+- The sites additionally have a hidden honeypot field and a "too fast to be
+  human" check (submitted under 2s after load): either one gets the success
+  message and **no write**, so bots get no feedback to learn from.
+- Analytics: both surfaces push `contact_form_submit` (`result` +
+  `detail`) — the Flutter app through its GTM data-layer bridge, the sites
+  through `window.dataLayer`. One GTM trigger can cover all four.
+- Length limits (80 / 160 / 2000 characters) come from the Flutter form and are
+  mirrored by the sites' `maxlength` attributes and by `firestore.rules`.
+
+### 5. Tests
+`flutter test` covers the service (payload shape, endpoint + API key, 403 → rejected,
+transport failure → unreachable, truncation) and the form (validation, disabled
+state, success/error rendering, Urdu/RTL) in `test/contact_service_test.dart`
+and `test/contact_form_test.dart`. The sites' JS helpers (`validate`,
+`buildPayload`, `endpoint`, `isEmail`) are exposed on `window.NasimContactForm`
+so they can be exercised outside a browser.
+
+### 6. Verifying the rules — including that they don't reject real submissions
+`scripts/check_firestore_rules.py` runs a matrix in both directions: twelve
+bodies that must be refused (missing/extra fields, unknown source or locale,
+over-long values, malformed e-mail or timestamp) and five real submissions — one
+per surface plus an edge case — that must be accepted, then read/update/delete
+probes that must stay closed. It exits non-zero if anything is off, so it can gate
+a deploy step.
+
+```bash
+# Emulator — the place to iterate on the rules; nothing here touches real data.
+# (The Firestore emulator needs Java 21+; firebase will say so if it's missing.)
+firebase emulators:start --only firestore --project demo-nasim
+python3 scripts/check_firestore_rules.py \
+    "http://127.0.0.1:8080/v1/projects/demo-nasim/databases/(default)/documents"
+
+# Or against the live project, using .env. This really writes, and the rules
+# deny deletes, so remove the test rows in the console afterwards.
+python3 scripts/check_firestore_rules.py
+```
+
+Worth having: the first version of this ruleset was wrong in exactly the way this
+catches. `String.matches()` in rules is a **full match**, not a search, so a check
+written as "starts with the ISO-8601 shape" rejected every real submission — 403
+for all four surfaces — and that only became visible when a real submission was
+attempted, since the rejection direction looked perfect.
+
+**Status: published and verified against the live project** — twelve malformed
+bodies refused, all five real submissions accepted (nasim.us, nasim.pk, nasim.ae,
+the Flutter app's own payload, and the empty-`pageUrl`/seconds-timestamp edge
+case), reads/updates/deletes still closed. The shipped Dart client was confirmed
+separately with `dart run tool/contact_probe.dart`, a throwaway probe that runs
+`contact_service.dart` against the live endpoint (`tool/` is git-ignored; recreate
+it from `scripts/check_firestore_rules.py` if you need it again).
 
 ## Fonts + reader-friendly tools (regional sites)
 Synced `content/common/_includes/header.html`, `theme_toggle.html`, and

@@ -1,0 +1,178 @@
+[
+  {
+    "id": "0JXrbv1wYJXA4a0LGZFI",
+    "path": "0JXrbv1wYJXA4a0LGZFI",
+    "data": {
+      "locale": "en",
+      "message": "Rules verification submission \u2014 safe to delete.",
+      "pageUrl": "https://abidnasim.com/",
+      "source": "abidnasim-com-app",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32.183456Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "2tmTjQAWhGOqhAww68Kn",
+    "path": "2tmTjQAWhGOqhAww68Kn",
+    "data": {
+      "locale": "en",
+      "message": "End-to-end check of the contact form endpoint (collection: contacts). Safe to delete.",
+      "pageUrl": "http://localhost/build-check",
+      "source": "nasim.us",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:40:00.000Z",
+      "name": "Cline validation test"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "7sMCg61oFBUUzQQwMeiE",
+    "path": "7sMCg61oFBUUzQQwMeiE",
+    "data": {
+      "name": "x"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "BgWx01l2mPN5hlqZAax4",
+    "path": "BgWx01l2mPN5hlqZAax4",
+    "data": {
+      "locale": "en",
+      "message": "Rules verification submission \u2014 safe to delete.",
+      "pageUrl": "",
+      "source": "nasim.us",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "CXBCYhflSg9enz5z0udy",
+    "path": "CXBCYhflSg9enz5z0udy",
+    "data": {
+      "locale": "en",
+      "message": "Real Dart client run against the live project \u2014 safe to delete.",
+      "pageUrl": "https://abidnasim.com/",
+      "source": "abidnasim-com-app",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:52:00.784591Z",
+      "name": "Dart client probe"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "D8ivUFlm09QLFd4bV0nK",
+    "path": "D8ivUFlm09QLFd4bV0nK",
+    "data": {
+      "locale": "en",
+      "message": "Rules verification submission \u2014 safe to delete.",
+      "pageUrl": "https://nasim.us/contact/",
+      "source": "nasim.us",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32.183Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "ELN7nRzzclWEyLUiFqky",
+    "path": "ELN7nRzzclWEyLUiFqky",
+    "data": {
+      "locale": "ur",
+      "message": "\u0642\u0648\u0627\u0639\u062f \u06a9\u06cc \u062c\u0627\u0646\u0686 \u2014 \u062d\u0630\u0641 \u06a9\u0631\u0646\u0627 \u0645\u062d\u0641\u0648\u0638 \u06c1\u06d2\u06d4",
+      "pageUrl": "https://nasim.pk/contact/",
+      "source": "nasim.pk",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32.183Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "JmTT0WzyR55blS1eOiZV",
+    "path": "JmTT0WzyR55blS1eOiZV",
+    "data": {
+      "locale": "ar",
+      "message": "\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u0644\u0642\u0648\u0627\u0639\u062f \u2014 \u0622\u0645\u0646 \u0644\u0644\u062d\u0630\u0641.",
+      "pageUrl": "https://nasim.ae/contact/",
+      "source": "nasim.ae",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32.183Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "QvhEWk2hJT2CVLMp8Xo9",
+    "path": "QvhEWk2hJT2CVLMp8Xo9",
+    "data": {
+      "locale": "en",
+      "message": "Rules verification submission \u2014 safe to delete.",
+      "pageUrl": "https://abidnasim.com/",
+      "source": "abidnasim-com-app",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32.183456Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "YyRVQYBLYorV5BQLRdex",
+    "path": "YyRVQYBLYorV5BQLRdex",
+    "data": {
+      "locale": "ur",
+      "message": "\u0642\u0648\u0627\u0639\u062f \u06a9\u06cc \u062c\u0627\u0646\u0686 \u2014 \u062d\u0630\u0641 \u06a9\u0631\u0646\u0627 \u0645\u062d\u0641\u0648\u0638 \u06c1\u06d2\u06d4",
+      "pageUrl": "https://nasim.pk/contact/",
+      "source": "nasim.pk",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32.183Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "fcwM9O4jxTuUvVGZ87SY",
+    "path": "fcwM9O4jxTuUvVGZ87SY",
+    "data": {
+      "locale": "en",
+      "message": "Rules verification submission \u2014 safe to delete.",
+      "pageUrl": "",
+      "source": "nasim.us",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "jT6Uk1P4S9sOxSiTdKnu",
+    "path": "jT6Uk1P4S9sOxSiTdKnu",
+    "data": {
+      "locale": "ar",
+      "message": "\u062a\u062d\u0642\u0642 \u0645\u0646 \u0627\u0644\u0642\u0648\u0627\u0639\u062f \u2014 \u0622\u0645\u0646 \u0644\u0644\u062d\u0630\u0641.",
+      "pageUrl": "https://nasim.ae/contact/",
+      "source": "nasim.ae",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32.183Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  },
+  {
+    "id": "w6iZBbD0h7QC5IhnVSt7",
+    "path": "w6iZBbD0h7QC5IhnVSt7",
+    "data": {
+      "locale": "en",
+      "message": "Rules verification submission \u2014 safe to delete.",
+      "pageUrl": "https://nasim.us/contact/",
+      "source": "nasim.us",
+      "email": "me@abidnasim.com",
+      "createdAt": "2026-09-29T15:23:32.183Z",
+      "name": "Cline rules check"
+    },
+    "subcollections": {}
+  }
+]

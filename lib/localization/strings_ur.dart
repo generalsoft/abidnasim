@@ -56,6 +56,20 @@ const Map<String, String> stringsUr = {
   'contact_email': 'ای میل',
   'contact_phone': 'فون',
   'contact_whatsapp': 'واٹس ایپ',
+  'contact_form_heading': 'پیغام بھیجیں',
+  'contact_form_name': 'نام',
+  'contact_form_email': 'ای میل',
+  'contact_form_message': 'پیغام',
+  'contact_form_submit': 'پیغام بھیجیں',
+  'contact_form_sending': 'بھیجا جا رہا ہے…',
+  'contact_form_required': 'یہ خانہ پُر کرنا ضروری ہے',
+  'contact_form_invalid_email': 'درست ای میل پتہ درج کریں',
+  'contact_form_success':
+      'شکریہ — آپ کا پیغام بھیج دیا گیا ہے۔ میں آپ کے دیے گئے ای میل پتے پر جواب دوں گا۔',
+  'contact_form_error':
+      'پیغام نہیں بھیجا جا سکا۔ براہِ کرم دوبارہ کوشش کریں یا اوپر دیے گئے ای میل / واٹس ایپ بٹن استعمال کریں۔',
+  'contact_form_unavailable':
+      'یہ فارم اس اپلی کیشن میں دستیاب نہیں ہے۔ براہِ کرم اوپر دیے گئے ای میل یا واٹس ایپ بٹن استعمال کریں۔',
 
   // Footer
   'footer_brand': 'عابد نسیم',

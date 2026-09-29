@@ -6,6 +6,8 @@ permalink: /contact/
 
 I'd love to hear from you.
 
+{% include contact_form.html %}
+
 ## Email
 
 [abid@nasim.us](mailto:abid@nasim.us)
