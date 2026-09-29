@@ -142,6 +142,61 @@ Not done: tapping a card doesn't do anything (by design, per your answer).
 If you later want it to open the matching regional post, that's a small
 addition — happy to wire it in with url_launcher_service.dart.
 
+### Update: the grid became an auto-flipping hero carousel
+`lib/widgets/work_section.dart` no longer renders a grid — the same 8 projects
+now page through one hero slide at a time:
+
+- **Tunable timing.** `WorkSection(autoPlayInterval:, flipDuration:)` controls how
+  often it flips and how long the turn takes (`Duration(seconds: 7)` and
+  `Duration(milliseconds: 750)` by default). The thin line under the slides is the
+  countdown for the current slide, so the timer is visible rather than guessed at.
+- **The page-turn look.** Slides that are off-centre are turned a few degrees
+  around the vertical axis (with perspective added) and scaled down, so the pages
+  visibly flip past each other; the neighbouring slides peek in at the sides
+  (`viewportFraction: 0.88`).
+- **Controls.** Prev/next arrows, tappable dot indicators, and a play/pause button.
+  Any interaction restarts the countdown. The arrows use Material's directional
+  icons, so they mirror correctly in ur/ar. Swiping works on touch devices.
+- **It holds still when it should:** while a swipe is in flight, when the app is
+  backgrounded, or when the OS asks for reduced motion
+  (`MediaQuery.disableAnimationsOf`) — in that last case the visitor drives the
+  carousel manually and the pause button is hidden.
+- **Swipe vs. text selection.** Dragging is restricted to touch-like input (see
+  `_CarouselScrollBehavior`), because the whole page sits inside a `SelectionArea`
+  and a mouse drag would otherwise fight text selection.
+- **Analytics.** Manual navigation pushes `work_carousel_navigation`
+  (`trigger` = `next` / `previous` / `dot`, plus `slide_slug`); the play/pause
+  button pushes `work_carousel_autoplay`. Automatic flips are deliberately not
+  tracked, so the data layer isn't flooded.
+- **New strings** in `strings_{en,ur,ar}.dart`: `work_prev`, `work_next`,
+  `work_pause`, `work_play`, `work_slide`. The "01 / 08" counter is hidden below
+  640px wide.
+- Cards/slides are still display-only: tapping one still does nothing, per the
+  original decision (no outbound links to the regional posts).
+
+## Cross-platform analytics + tests
+`lib/services/analytics_service.dart` imported `dart:js_interop` directly, which
+meant the project only compiled for web — any other target, including
+`flutter test`, failed to compile. It is now a conditional export:
+
+- `analytics_service.dart` — chooses the implementation (every existing import
+  path is unchanged).
+- `analytics_service_web.dart` — the previous GTM / `window.dataLayer` bridge,
+  byte-for-byte behaviour.
+- `analytics_service_stub.dart` — no-op `trackEvent` for the VM (tests) and
+  Android/iOS/macOS builds.
+
+Web behaviour is untouched: `flutter build web --release` verified, including the
+wasm dry run.
+
+`flutter test` now passes end to end:
+- `test/work_section_test.dart` — 8 tests covering the carousel: auto-flip,
+  wrap-around after the last project, arrows, dot jumps, pause/resume, reduced
+  motion, RTL + Urdu copy, and the narrow-phone layout (overflow guard).
+- `test/widget_test.dart` — replaced the stale "counter increments" template
+  (it referenced a `MyApp` class that doesn't exist, so it never compiled) with a
+  home-page smoke test.
+
 ## Fonts + reader-friendly tools (regional sites)
 Synced `content/common/_includes/header.html`, `theme_toggle.html`, and
 `_sass/site-extras.scss` fresh from your repo's HEAD before editing, so

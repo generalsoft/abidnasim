@@ -37,6 +37,11 @@ const Map<String, String> stringsEn = {
   // Work
   'work_eyebrow': 'SELECTED WORK',
   'work_title': 'For over 30 years\nI have delivered projects, like:',
+  'work_prev': 'Previous project',
+  'work_next': 'Next project',
+  'work_pause': 'Pause the automatic flip',
+  'work_play': 'Resume the automatic flip',
+  'work_slide': 'Project',
 
   // About
   'about_eyebrow': 'ABOUT',
