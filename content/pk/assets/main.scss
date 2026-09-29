@@ -1,9 +1,11 @@
 ---
 ---
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
+
 @import "minima";
 @import "site-extras";
 
-// --- RTL (Arabic) ---
+// --- RTL (Urdu) ---
 html {
   direction: rtl;
 }
@@ -25,4 +27,28 @@ pre,
 code {
   direction: ltr;
   text-align: left;
+}
+
+// Noto Nastaliq Urdu — the only widely-supported, properly hinted, freely
+// licensed Nastaliq webfont (Google/Noto project; older desktop Nastaliq
+// fonts like Jameel Noori aren't licensed or optimized for the web).
+// Nastaliq's diagonal stacking and dense diacritics need visibly larger
+// size and looser line-height than Latin/Naskh text to stay legible —
+// these overrides apply on top of the reader-tools font-size scaling,
+// which still works normally since everything here is in rem/em.
+body {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  font-size: 1.2rem;
+  line-height: 2.2;
+}
+
+h1, h2, h3, h4, h5, h6,
+.site-title {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  line-height: 1.8;
+}
+
+.post-content p,
+.page-content p {
+  margin-bottom: 1.6em;
 }

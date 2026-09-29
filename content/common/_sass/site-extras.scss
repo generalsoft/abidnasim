@@ -233,4 +233,128 @@ a {
   outline-offset: 2px;
 }
 
+/* Reader tools (text size + reading aids) */
+
+:root {
+  --reader-scale: 1;
+}
+
+html {
+  font-size: calc(100% * var(--reader-scale));
+}
+
+.reader-tools {
+  position: relative;
+}
+
+.reader-tools-toggle {
+  border: 1px solid var(--border-color);
+  background: var(--toggle-background);
+  color: var(--text-color);
+
+  border-radius: 999px;
+
+  min-width: 42px;
+  height: 42px;
+  padding: 0 14px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reader-tools-toggle:hover {
+  opacity: 0.8;
+}
+
+.reader-tools-toggle:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+.reader-tools-panel {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + 10px);
+  z-index: 20;
+
+  min-width: 220px;
+
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  padding: 14px;
+}
+
+.reader-tools-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 6px 0;
+}
+
+.reader-tools-label {
+  font-size: 13px;
+  color: var(--text-color);
+}
+
+.reader-tools-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.reader-tools-buttons button {
+  border: 1px solid var(--border-color);
+  background: var(--toggle-background);
+  color: var(--text-color);
+
+  border-radius: 6px;
+  padding: 4px 8px;
+
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.reader-tools-buttons button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.reader-tools-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 13px;
+  color: var(--text-color);
+  cursor: pointer;
+  width: 100%;
+}
+
+.reading-relaxed .post-content,
+.reading-relaxed .page-content {
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+}
+
+.reading-relaxed .post-content p,
+.reading-relaxed .page-content p {
+  margin-bottom: 1.4em;
+}
+
+.reading-underline-links a {
+  text-decoration: underline;
+}
+
+
 

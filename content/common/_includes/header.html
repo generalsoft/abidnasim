@@ -1,3 +1,10 @@
+<!-- Google Tag Manager (noscript) -->
+{%- if site.gtm_id -%}
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtm_id }}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+{%- endif -%}
+<!-- End Google Tag Manager (noscript) -->
+
 <header class="site-header" role="banner">
 
   <div class="wrapper">
@@ -36,7 +43,10 @@
       </nav>
     {%- endif -%}
 
-    {% include theme_toggle.html %}
+    <div class="site-header-controls">
+      {% include theme_toggle.html %}
+      {% include reader_tools.html %}
+    </div>
 
   </div>
 

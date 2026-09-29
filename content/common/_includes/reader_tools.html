@@ -1,0 +1,134 @@
+<div class="reader-tools">
+
+  <button
+    id="reader-tools-toggle"
+    class="reader-tools-toggle"
+    type="button"
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-controls="reader-tools-panel"
+    aria-label="Reading tools"
+    title="Reading tools">
+    Aa
+  </button>
+
+  <div id="reader-tools-panel" class="reader-tools-panel" hidden>
+
+    <div class="reader-tools-row">
+      <span class="reader-tools-label">Text size</span>
+      <div class="reader-tools-buttons">
+        <button type="button" id="reader-font-decrease" aria-label="Decrease text size">A−</button>
+        <button type="button" id="reader-font-reset" aria-label="Reset text size">Reset</button>
+        <button type="button" id="reader-font-increase" aria-label="Increase text size">A+</button>
+      </div>
+    </div>
+
+    <div class="reader-tools-row">
+      <label class="reader-tools-toggle-row" for="reader-relaxed-spacing">
+        <input type="checkbox" id="reader-relaxed-spacing">
+        Relaxed line spacing
+      </label>
+    </div>
+
+    <div class="reader-tools-row">
+      <label class="reader-tools-toggle-row" for="reader-underline-links">
+        <input type="checkbox" id="reader-underline-links">
+        Underline links
+      </label>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  var FONT_STEPS = [0.9, 1, 1.1, 1.2, 1.3];
+  var DEFAULT_STEP_INDEX = 1; // 1 = 100%
+
+  var toggle = document.getElementById("reader-tools-toggle");
+  var panel = document.getElementById("reader-tools-panel");
+  var decreaseBtn = document.getElementById("reader-font-decrease");
+  var increaseBtn = document.getElementById("reader-font-increase");
+  var resetBtn = document.getElementById("reader-font-reset");
+  var relaxedCheckbox = document.getElementById("reader-relaxed-spacing");
+  var underlineCheckbox = document.getElementById("reader-underline-links");
+
+  function readStoredIndex() {
+    var raw = localStorage.getItem("readerFontStepIndex");
+    var index = raw === null ? DEFAULT_STEP_INDEX : parseInt(raw, 10);
+
+    if (isNaN(index) || index < 0 || index >= FONT_STEPS.length) {
+      index = DEFAULT_STEP_INDEX;
+    }
+
+    return index;
+  }
+
+  function applyFontStep(index) {
+    root.style.setProperty("--reader-scale", String(FONT_STEPS[index]));
+    localStorage.setItem("readerFontStepIndex", String(index));
+
+    decreaseBtn.disabled = index === 0;
+    increaseBtn.disabled = index === FONT_STEPS.length - 1;
+  }
+
+  function applyRelaxedSpacing(enabled) {
+    root.classList.toggle("reading-relaxed", enabled);
+    localStorage.setItem("readerRelaxedSpacing", enabled ? "1" : "0");
+    relaxedCheckbox.checked = enabled;
+  }
+
+  function applyUnderlineLinks(enabled) {
+    root.classList.toggle("reading-underline-links", enabled);
+    localStorage.setItem("readerUnderlineLinks", enabled ? "1" : "0");
+    underlineCheckbox.checked = enabled;
+  }
+
+  // Restore saved preferences on load.
+  var currentIndex = readStoredIndex();
+  applyFontStep(currentIndex);
+  applyRelaxedSpacing(localStorage.getItem("readerRelaxedSpacing") === "1");
+  applyUnderlineLinks(localStorage.getItem("readerUnderlineLinks") === "1");
+
+  toggle.addEventListener("click", function () {
+    var isOpen = !panel.hidden;
+    panel.hidden = isOpen;
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!panel.hidden && !panel.contains(event.target) && event.target !== toggle) {
+      panel.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  decreaseBtn.addEventListener("click", function () {
+    currentIndex = Math.max(0, currentIndex - 1);
+    applyFontStep(currentIndex);
+  });
+
+  increaseBtn.addEventListener("click", function () {
+    currentIndex = Math.min(FONT_STEPS.length - 1, currentIndex + 1);
+    applyFontStep(currentIndex);
+  });
+
+  resetBtn.addEventListener("click", function () {
+    currentIndex = DEFAULT_STEP_INDEX;
+    applyFontStep(currentIndex);
+    applyRelaxedSpacing(false);
+    applyUnderlineLinks(false);
+  });
+
+  relaxedCheckbox.addEventListener("change", function () {
+    applyRelaxedSpacing(relaxedCheckbox.checked);
+  });
+
+  underlineCheckbox.addEventListener("change", function () {
+    applyUnderlineLinks(underlineCheckbox.checked);
+  });
+})();
+</script>

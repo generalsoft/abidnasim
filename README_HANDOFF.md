@@ -141,3 +141,79 @@ Run `flutter pub get` before building, since this adds a new dependency.
 Not done: tapping a card doesn't do anything (by design, per your answer).
 If you later want it to open the matching regional post, that's a small
 addition — happy to wire it in with url_launcher_service.dart.
+
+## Fonts + reader-friendly tools (regional sites)
+Synced `content/common/_includes/header.html`, `theme_toggle.html`, and
+`_sass/site-extras.scss` fresh from your repo's HEAD before editing, so
+nothing here overwrites anything you've done since the last handoff.
+
+**`content/us`** — Google Fonts import added at the top of `assets/main.scss`,
+exactly the URL you gave: Public Sans (400/700 + 400 italic) for body text,
+Rubik (500/600) for headings and the site title.
+
+**`content/pk`** — Noto Nastaliq Urdu (Google Fonts, weights 400-700,
+variable). This is the font I'd recommend for "best Nastaliq" in practice:
+it's the only Nastaliq design that's both properly hinted for screens and
+openly licensed for the web (older desktop-oriented options like Jameel
+Noori Nastaleeq aren't licensed or built for browser rendering). Since
+Nastaliq's diagonal stacking and dense diacritics need more room than Latin
+or Naskh text, I also bumped body `font-size` to 1.2rem and `line-height` to
+2.2, with matching paragraph spacing — plain default sizing would be
+genuinely hard to read in this script.
+
+**`content/ae`** — Cairo (Google Fonts, weights 400/600/700, variable). Dubai
+isn't on Google Fonts and its license explicitly prohibits redistributing
+the font files, so self-hosting it wasn't an option; Cairo is Google's own
+OFL-licensed Arabic+Latin family (extends Titillium Web into Arabic, Kufi-
+influenced) and is a reasonable, properly-licensed stand-in for Dubai's
+modern-government-sans feel. Same pattern as `pk`: import above the minima
+import, `font-family` set on body/headings, plus a modest line-height bump
+(1.8) and paragraph spacing — lighter-touch than the Nastaliq adjustments
+since Cairo is a conventional sans, not a cursive script.**All three sites** — new shared "reader tools" widget, next to the existing
+dark/light toggle in the header:
+- `content/common/_includes/reader_tools.html` (new) — an "Aa" button
+  opening a small panel with: text-size steps (90/100/110/120/130%, persisted
+  via localStorage), a "Relaxed line spacing" toggle (loosens
+  `.post-content`/`.page-content` line-height and paragraph spacing), and an
+  "Underline links" toggle (WCAG 1.4.1 aid — link color alone isn't always
+  enough). All three settings persist per-browser, same mechanism as the
+  existing dark-mode toggle.
+- `content/common/_includes/header.html` (edited) — includes the new widget,
+  and both it and the theme toggle now sit inside `.site-header-controls`, a
+  class that already existed in `site-extras.scss` but wasn't actually used
+  in any markup until now.
+- `content/common/_sass/site-extras.scss` (edited) — `:root { --reader-scale }`
+  drives `html { font-size: calc(100% * var(--reader-scale)) }`, so the size
+  control scales the whole page (everything in minima + these overrides is
+  already in rem/em). Panel/button styling uses the same `--border-color` /
+  `--toggle-background` / `--text-color` variables as the dark-mode system,
+  so it themes correctly in both light and dark automatically.
+
+Nothing here is region-specific except the three font imports — the reader
+tools widget is identical on all three sites.
+
+## Google Tag Manager (regional sites)
+`abidnasim.com` already has GTM-N3H2VWT3 wired into the Flutter app's
+`web/index.html` — nothing changed there. Added the other three containers
+to the regional Jekyll sites:
+
+- `content/common/_includes/custom-head.html` (new) — the GTM `<head>`
+  script. This overrides minima's own `_includes/custom-head.html`, which
+  ships as an empty placeholder specifically meant for this kind of
+  override (minima's `head.html` already includes it automatically), so
+  nothing about the existing favicon/SEO-tag/feed/CSS `<head>` setup was
+  touched.
+- `content/common/_includes/header.html` (edited) — added the GTM
+  `<noscript>` fallback as the very first thing inside `<body>` (header.html
+  is the first include minima's layout renders after `<body>` opens, before
+  the reader tools / theme toggle / nav markup already in this file).
+- `content/{ae,pk,us}/_config.yml` (edited) — each sets its own `gtm_id`,
+  which both new includes read via `site.gtm_id`. IDs used, matching what
+  you gave me:
+  - `ae` → GTM-KVLB5QQK ("AN - nasim.ae")
+  - `pk` → GTM-T6QNJBJ4 ("AN - nasim.pk")
+  - `us` → GTM-N542H9XX ("AN - nasim.us")
+
+Since this is one shared template reading a per-region config value, adding
+a fourth region later just means setting `gtm_id` in its `_config.yml` —
+no template changes needed.
