@@ -37,9 +37,6 @@ const Map<String, String> stringsEn = {
   // Work
   'work_eyebrow': 'SELECTED WORK',
   'work_title': 'For over 30 years\nI have delivered projects, like:',
-  'work_placeholder_label': 'PROJECTS',
-  'work_placeholder_heading': 'coming soon ...',
-  'work_placeholder_desc': 'projects, companies, products, achievements, and case studies.',
 
   // About
   'about_eyebrow': 'ABOUT',

@@ -104,3 +104,40 @@ Synced from your repo's own `b36bbf5` commit and the preceding `07b17be`
 - Everything else in `content/us` and `content/ae` (about/contact/work/blog/
   hobby, `_config.yml`, assets) matched your repo's HEAD exactly — nothing
   else changed there.
+
+## Projects/Work section (Flutter)
+Replaced the "coming soon" placeholder with a real grid of 8 project cards,
+built from the same case-study data already published as Jekyll posts under
+content/{ae,us,pk}/_posts (section: work).
+
+- `lib/data/work_items.dart` — new file. A `WorkItem` model + const list of
+  all 8 entries, each with title/description/tags keyed by locale ('en'/'ur'/'ar').
+  This is a **hand-maintained duplicate** of the Jekyll front matter — there's
+  no shared source between the Flutter app and the website content, so if you
+  edit a work post later, mirror the change here too. Comment at the top of
+  the file says the same.
+- `lib/widgets/work_section.dart` — rewritten. Renders a responsive grid
+  (3 columns desktop / 2 tablet / 1 mobile) of cards showing image, localized
+  title (2-line clamp), description (4-line clamp), and up to 3 tags. Cards
+  are display-only — no tap/navigation, per your answer that this should be
+  in-app data rather than links out to the regional sites.
+- `assets/images/work/` — new. The 8 images copied from your `content/*/assets/
+  content/work/` folders. Two were re-compressed for app-bundle size:
+  `clinical-erp.png` (1.9 MB) → `clinical-erp.jpg` (156 KB, resized to 1024px
+  wide, quality 88) and `NdPHR.jpg` (307 KB) → re-encoded at quality 87
+  (180 KB). Visually near-identical; check them at full size if you want to
+  be sure. The other 6 are SVG diagrams, copied as-is (~9-11 KB each).
+- `pubspec.yaml` — added `flutter_svg: ^2.0.10+1` (renders the SVG diagrams;
+  `Image.asset` can't) and declared `assets/images/work/` under `flutter:`.
+  I edited your live pubspec (with `flutter_launcher_icons` config already
+  in it), not the older one from earlier in this project.
+- `lib/localization/strings_{en,ur,ar}.dart` — removed the now-unused
+  `work_placeholder_label/heading/desc` keys (dead code, since the real grid
+  replaced that placeholder text). `work_eyebrow` and `work_title` are still
+  used as the section header.
+
+Run `flutter pub get` before building, since this adds a new dependency.
+
+Not done: tapping a card doesn't do anything (by design, per your answer).
+If you later want it to open the matching regional post, that's a small
+addition — happy to wire it in with url_launcher_service.dart.
