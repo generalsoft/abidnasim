@@ -39,3 +39,5 @@ lib/main_backup.dart
 
 # Python bytecode (scripts/)
 __pycache__/
+# Widget Preview related
+.widget_preview/

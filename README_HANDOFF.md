@@ -30,8 +30,6 @@ to generalsoft/nasim-{pk,us,ae} using the `REGIONAL_SITES_PAT` secret.
 - Optional hardening: restrict the Firebase API key in Google Cloud (Firestore
   API + your referrers), and/or move `createdAt` to a server-set timestamp via
   the Firestore `:commit` endpoint so it can't be forged.
-- `services/url_launcher_service.dart` `openUrl()` is still a placeholder: buttons track
-  analytics but don't navigate yet.
 - Persist selected language between visits.
 - Replace placeholder copy in content/{pk,us,ae}.
 
@@ -434,3 +432,42 @@ to the regional Jekyll sites:
 Since this is one shared template reading a per-region config value, adding
 a fourth region later just means setting `gtm_id` in its `_config.yml` —
 no template changes needed.
+
+## Global presence previews (Flutter) + real outbound links
+
+The three "Global presence" cards (nasim.ae / nasim.pk / nasim.us) now show a
+live, randomly-chosen page of the matching site, scrolling upward inside the
+card, and tapping a card opens that site in a new tab.
+
+- `services/url_launcher_service.dart` is no longer a placeholder — it is now a
+  conditional export, exactly like `analytics_service.dart`:
+  - `url_launcher_service_web.dart` — `openUrl()` calls
+    `window.open(url, '_blank', 'noopener,noreferrer')` through `package:web`
+    (web only). Covers the regional cards **and** the contact channels
+    (`mailto:`, `tel:`, `wa.me`), which were also no-ops before.
+  - `url_launcher_service_stub.dart` — no-op for the VM (`flutter test`) and the
+    native builds, so the call sites compile and are harmless there.
+- `widgets/site_preview.dart` — `SitePreview(region:, url:, title:)`, a passive
+  preview with the same conditional-import split:
+  - `site_preview_web.dart` — embeds the real page in an `<iframe>` Flutter
+    platform view (`dart:ui_web` + `package:web`). Cross-origin rules make a
+    real programmatic scroll impossible, so the frame is rendered 3× the card's
+    height and an injected `@keyframes anSitePreviewScroll` animation slides it
+    upward (26 s per pass). The frame/wrapper set `pointer-events: none`, so taps
+    fall through to the card, which opens the site; `prefers-reduced-motion`
+    freezes it. Registered one platform-view factory per market code
+    (`an-regional-site-preview-<AE|PK|US>`).
+  - `site_preview_stub.dart` — a Flutter mock that scrolls the same way for
+    tests / native builds, so the card still reads correctly off the web.
+- `widgets/presence_section.dart` — each card picks a random page of its own
+  region from the shared Jekyll permalinks (`/`, `/about/`, `/work/`, `/blog/`,
+  `/hobby/`, `/contact/`), so the three cards preview different pages and a
+  reload reshuffles them. The card now uses `mainAxisExtent` (fixed height) so
+  the preview panel gets a dependable slice of room; the domain line shows the
+  chosen path (e.g. `nasim.ae/work/`).
+- `pubspec.yaml` — adds `web: ^1.1.1` (typed DOM/Window bindings, used on web
+  only; resolves from the local pub cache).
+
+Caveat: a card can only show what the browser will let it frame. If a regional
+site ever sends `X-Frame-Options`/`frame-ancestors`, that card will be blank
+(the dark fallback panel shows through); the tap-to-open behaviour is unaffected.
