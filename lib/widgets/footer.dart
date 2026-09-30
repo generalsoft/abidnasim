@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../constants/site_constants.dart';
 import '../localization/app_localizations.dart';
-import '../services/analytics_service.dart';
-import '../services/url_launcher_service.dart';
+import 'shared/inline_link.dart';
 
 /// Shared look for the footer's fine print.
 final TextStyle _creditStyle = TextStyle(color: Colors.white.withValues(alpha: 0.36), fontSize: 12);
+
+/// The link sits brighter than the fine print around it, so it reads as
+/// clickable at rest.
+final TextStyle _creditLinkStyle = _creditStyle.copyWith(color: Colors.white.withValues(alpha: 0.62));
 
 /// Site footer: the brand mark on one side, and the copyright plus the
 /// "Developed by Generalsoft FZ-LLC" credit on the other.
@@ -109,7 +112,12 @@ class _GeneralsoftCredit extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _CreditLink(label: SiteConstants.generalsoftName, url: url),
+          InlineLink(
+            label: SiteConstants.generalsoftName,
+            url: url,
+            style: _creditLinkStyle,
+            analyticsName: 'generalsoft',
+          ),
           const SizedBox(width: 5),
           Text(SiteConstants.generalsoftLegalSuffix, style: _creditStyle),
         ],
@@ -118,49 +126,4 @@ class _GeneralsoftCredit extends StatelessWidget {
   }
 }
 
-/// An inline footer link: underlined, brightens on hover, opens in a new tab.
-class _CreditLink extends StatefulWidget {
-  final String label;
-  final String url;
-
-  const _CreditLink({required this.label, required this.url});
-
-  @override
-  State<_CreditLink> createState() => _CreditLinkState();
-}
-
-class _CreditLinkState extends State<_CreditLink> {
-  bool hovering = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => hovering = true),
-      onExit: (_) => setState(() => hovering = false),
-      child: GestureDetector(
-        onTap: () {
-          trackEvent(
-            'footer_link_click',
-            parameter1Name: 'link_name',
-            parameter1Value: 'generalsoft',
-            parameter2Name: 'destination_url',
-            parameter2Value: widget.url,
-          );
-
-          openUrl(widget.url);
-        },
-        child: Text(
-          widget.label,
-          style: _creditStyle.copyWith(
-            color: Colors.white.withValues(alpha: hovering ? 0.9 : 0.62),
-            fontWeight: FontWeight.w600,
-            decoration: TextDecoration.underline,
-            decorationColor: Colors.white.withValues(alpha: hovering ? 0.55 : 0.26),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
