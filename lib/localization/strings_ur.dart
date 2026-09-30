@@ -73,4 +73,6 @@ const Map<String, String> stringsUr = {
 
   // Footer
   'footer_brand': 'عابد نسیم',
+  'footer_copyright_name': 'عابد نسیم',
+  'footer_developed_by': 'تیار کردہ از',
 };

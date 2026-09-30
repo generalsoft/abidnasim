@@ -468,6 +468,76 @@ card, and tapping a card opens that site in a new tab.
 - `pubspec.yaml` — adds `web: ^1.1.1` (typed DOM/Window bindings, used on web
   only; resolves from the local pub cache).
 
+## Footer credit
+
+The docked footer now reads `© <year> Abid Nasim · Developed by Generalsoft
+FZ-LLC`, with **Generalsoft** a link.
+
+- `constants/site_constants.dart` — `generalsoftName` / `generalsoftLegalSuffix`
+  (`FZ-LLC`), and `generalsoftWebsiteFor(languageCode)`, which returns
+  `https://generalsoft.ae/ar/` for `ar` and `https://generalsoft.ae/en/` for
+  everything else (so English and Urdu readers both get the English page).
+- `localization/strings_{en,ur,ar}.dart` — new `footer_copyright_name` and
+  `footer_developed_by` keys.
+- `widgets/footer.dart` — the credit is a `Wrap` (so a narrow docked bar breaks it
+  across lines instead of overflowing) holding the copyright, a `·`, the
+  "Developed by" label, and the company. Only "Generalsoft" is clickable
+  (underlined, brightens on hover, `SystemMouseCursors.click`); it opens in a new
+  tab through `url_launcher_service.dart` and pushes `footer_link_click`. The
+  company name is wrapped in `Directionality(ltr)` — it is Latin text, and bidi
+  would otherwise render it as "FZ-LLC Generalsoft" on the ar/ur pages. Below
+  720 px the brand and the credit stack instead of sharing a line.
+- `test/footer_test.dart` (new) — the URL mapping per language, the credit text
+  in en/ar, the LTR pinning, and no overflow at 360 px.
+
+## Global presence previews: page selection
+
+Each card used to pick from a fixed list of six section paths. It now draws from
+the site's **real page list**, read at runtime from its sitemap:
+
+- `services/site_pages_service.dart` (new) — `fetchLiveSitePages(siteUrl)` GETs
+  `siteUrl/sitemap.xml` and returns the page paths, or `null` when it can't be
+  read (missing, blocked, offline, not XML). Nothing throws. `parseSitemapPaths`
+  keeps only same-origin "pretty" URLs (`/`, or paths ending in `/`), which drops
+  `/feed.xml` and the Google site-verification `.html` the sitemap also lists. It
+  is unit-tested against a MockClient, so the suite stays offline.
+- `data/site_pages.dart` (new) — the curated fallback list per market code (6
+  sections + 13 posts), hand-mirrored from the `permalink:` front matter under
+  content/{ae,pk,us}, exactly like `work_items.dart`. This is what paints first.
+- `widgets/presence_section.dart` — picks a random path from the curated list in
+  `initState` (so a card is never blank), then, **on web only**, re-rolls once the
+  sitemap has been read. The `kIsWeb` guard keeps `flutter test` off the network
+  and leaves off-web builds deterministic.
+- `widgets/site_preview_web.dart` — the platform-view type now carries the target
+  URL (`an-regional-site-preview-<market>-<url>`). `PlatformViewLink` rebuilds
+  its surface when the view type changes, so the re-roll actually swaps the
+  iframe rather than being ignored.
+- `content/{ae,pk}/_config.yml` — added `jekyll-sitemap` to `plugins`, matching
+  `content/us/_config.yml` and the gem already listed in `content/Gemfile`. Before
+  this only nasim.us served `/sitemap.xml` (ae/pk returned 404). **The regional
+  sites need a redeploy for this to take effect**; until then their cards keep
+  using the curated list, which covers the same 19 pages.
+
+Verified against the live `https://nasim.us/sitemap.xml`: the parser returns the
+19 real pages and drops the verification file.
+
+## Docked header + footer
+
+The nav bar and footer used to be the first and last slivers of the home page's
+`CustomScrollView`, so they scrolled out of view. `pages/home_page.dart` now
+frames the page instead: a `Column` of `NavBar` / `Expanded(CustomScrollView)` /
+`Footer`. Only the middle viewport scrolls, so the header stays pinned to the top
+and the footer to the bottom. Each is wrapped in `SafeArea` (header top inset
+only, footer bottom inset only) so the status bar / home indicator don't overlap
+them on phones; both are no-ops on web. Anchor scrolling (`Scrollable.ensureVisible`)
+is unaffected — it now lands sections just under the header.
+
+Because the footer is permanently on screen, `widgets/footer.dart` was slimmed
+from `fromLTRB(28, 40, 28, 50)` to `symmetric(horizontal: 28, vertical: 14)` and
+given a solid `0xFF08090D` background, so it reads as a fixed strip rather than
+a page-ending block. `test/home_page_test.dart` pins the behaviour down: the bars
+frame the scroll viewport and their positions don't move when it scrolls.
+
 Caveat: a card can only show what the browser will let it frame. If a regional
 site ever sends `X-Frame-Options`/`frame-ancestors`, that card will be blank
 (the dark fallback panel shows through); the tap-to-open behaviour is unaffected.

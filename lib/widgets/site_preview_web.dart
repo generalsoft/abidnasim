@@ -21,7 +21,8 @@ import 'package:web/web.dart' as web;
 // opens the real site.
 // -----------------------------------------------------------------------------
 
-/// View-type prefix; the market code is appended so each card owns its factory.
+/// View-type prefix; the market code and target URL are appended, so each
+/// distinct preview owns its factory.
 const String _viewTypePrefix = 'an-regional-site-preview-';
 
 /// How much taller than the visible card the embedded page is rendered. The
@@ -34,19 +35,21 @@ const String _scrollDuration = '26s';
 
 /// A view factory may only be registered once per view type (re-registering
 /// throws), and the registry outlives rebuilds, so remember what is wired up.
+/// There is one entry per (market, page) pair the visitor has seen.
 final Set<String> _registeredViewTypes = <String>{};
 
 /// Whether the shared scroll keyframes have already been added to the document.
 bool _keyframesInjected = false;
 
 Widget buildSitePreview({required String region, required String url, required String title}) {
-  final viewType = '$_viewTypePrefix$region';
+  // The view type carries the target URL. A card re-rolls its page once the
+  // site's sitemap has been read, and PlatformViewLink rebuilds the surface when
+  // the view type changes — so the iframe follows the new URL.
+  final viewType = '$_viewTypePrefix$region-$url';
 
   if (_registeredViewTypes.add(viewType)) {
     ui_web.platformViewRegistry.registerViewFactory(
       viewType,
-      // The URL is captured per registration: a card shows the same page for the
-      // whole visit, which is what we want (a reload picks a new random page).
       (int viewId) => _createPreviewFrame(url: url, title: title),
     );
   }

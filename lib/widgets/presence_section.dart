@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../data/site_pages.dart';
 import '../localization/app_localizations.dart';
 import '../services/analytics_service.dart';
+import '../services/site_pages_service.dart';
 import '../services/url_launcher_service.dart';
 import 'shared/content_section.dart';
 import 'site_preview.dart';
@@ -107,17 +111,46 @@ class _RegionCard extends StatefulWidget {
 }
 
 class _RegionCardState extends State<_RegionCard> {
-  /// A random one of the region's real pages is shown per card, so the three
-  /// cards (and repeat visits) preview different pages rather than every card
-  /// opening on the same home page. These are the shared section permalinks
-  /// across content/{ae,pk,us} — see the `permalink:` front matter there.
-  static const List<String> _previewPaths = ['/', '/about/', '/work/', '/blog/', '/hobby/', '/contact/'];
+  /// The curated page list for this market (data/site_pages.dart). It is the
+  /// fallback, and it is what paints first — the sitemap round-trip runs behind
+  /// it, so a card is never empty while the network is busy.
+  List<String> get _knownPaths => regionalSitePages[widget.data.code] ?? const <String>['/'];
 
-  late final String _previewPath = _previewPaths[Random().nextInt(_previewPaths.length)];
-
-  late final String _previewUrl = '${widget.data.url}$_previewPath';
+  /// Picked at random per card, so the three cards (and repeat visits) preview
+  /// different pages rather than every card opening on the same home page.
+  late String _previewPath = _pickRandom(_knownPaths);
 
   bool hovering = false;
+
+  String get _previewUrl => '${widget.data.url}$_previewPath';
+
+  @override
+  void initState() {
+    super.initState();
+    unawaited(_rollFromLiveSitemap());
+  }
+
+  /// Once the site's sitemap has been read, re-roll onto one of its pages, so
+  /// the preview draws from everything the site publishes — every case study,
+  /// blog post and hobby page, freshly added ones included — instead of the
+  /// curated list. Re-rolling changes the URL, which swaps the iframe (see
+  /// widgets/site_preview_web.dart).
+  ///
+  /// Web-only: off the web there is no live preview to feed, and skipping the
+  /// request keeps `flutter test` off the network.
+  Future<void> _rollFromLiveSitemap() async {
+    if (!kIsWeb) return;
+
+    final pages = await fetchLiveSitePages(widget.data.url);
+    if (!mounted || pages == null || pages.isEmpty) return;
+
+    final path = _pickRandom(pages);
+    if (path == _previewPath) return;
+
+    setState(() => _previewPath = path);
+  }
+
+  String _pickRandom(List<String> paths) => paths[Random().nextInt(paths.length)];
 
   @override
   Widget build(BuildContext context) {

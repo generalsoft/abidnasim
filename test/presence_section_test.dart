@@ -9,16 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:abidnasim/data/site_pages.dart';
 import 'package:abidnasim/localization/app_localizations.dart';
 import 'package:abidnasim/widgets/presence_section.dart';
 import 'package:abidnasim/widgets/site_preview.dart';
 
-/// The section permalinks the cards choose from — kept in sync with
-/// `_RegionCardState._previewPaths` in lib/widgets/presence_section.dart, which
-/// mirrors the `permalink:` front matter under content/{ae,pk,us}.
-const List<String> _previewPaths = ['/', '/about/', '/work/', '/blog/', '/hobby/', '/contact/'];
-
-const List<String> _domains = ['nasim.ae', 'nasim.pk', 'nasim.us'];
+/// Market code → host, matching `_RegionData` in the presence section.
+const Map<String, String> _domainsByMarket = <String, String>{
+  'AE': 'nasim.ae',
+  'PK': 'nasim.pk',
+  'US': 'nasim.us',
+};
 
 /// Pumps the presence section on its own, mirroring the app's localization
 /// delegates so ur/ar really resolve to RTL.
@@ -58,21 +59,23 @@ void main() {
     expect(find.text('United States'), findsOneWidget);
   });
 
-  testWidgets('previews a random real page of each site', (tester) async {
+  testWidgets('previews a random known page of each site', (tester) async {
     await pumpPresenceSection(tester);
 
     // The address line reads "<domain><path>": the domain must match the card
-    // and the path must be one of the region's shared section permalinks.
-    for (final domain in _domains) {
+    // and the path must come from that market's curated page list.
+    for (final entry in _domainsByMarket.entries) {
       final addresses = tester
-          .widgetList<Text>(find.textContaining(domain))
+          .widgetList<Text>(find.textContaining(entry.value))
           .map((text) => text.data!)
           .toList();
 
-      expect(addresses, hasLength(1), reason: 'expected one address line for $domain');
+      expect(addresses, hasLength(1), reason: 'expected one address line for ${entry.value}');
+
+      final path = addresses.single.substring(entry.value.length);
       expect(
-        _previewPaths.any((path) => addresses.single == '$domain$path'),
-        isTrue,
+        regionalSitePages[entry.key],
+        contains(path),
         reason: 'unexpected preview address: ${addresses.single}',
       );
     }
