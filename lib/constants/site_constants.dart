@@ -51,6 +51,20 @@ class SiteConstants {
   static String generalsoftWebsiteFor(String languageCode) =>
       languageCode == 'ar' ? generalsoftArabicWebsite : generalsoftWebsite;
 
+  /// The regional site that matches [languageCode] — the one a reader of that
+  /// language is most likely to want: Arabic → nasim.ae, Urdu → nasim.pk,
+  /// everything else → nasim.us.
+  static String regionalWebsiteFor(String languageCode) {
+    switch (languageCode) {
+      case 'ar':
+        return uaeWebsite;
+      case 'ur':
+        return pakistanWebsite;
+      default:
+        return unitedStatesWebsite;
+    }
+  }
+
   // ---------------------------------------------------------------------------
   // Social media
   // ---------------------------------------------------------------------------

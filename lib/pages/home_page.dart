@@ -72,7 +72,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SliverToBoxAdapter(child: PresenceSection()),
                   SliverToBoxAdapter(
-                    child: Container(key: _expertiseKey, child: const ExpertiseSection()),
+                    child: Container(
+                      key: _expertiseKey,
+                      child: ExpertiseSection(onContact: () => _scrollTo(_contactKey)),
+                    ),
                   ),
                   SliverToBoxAdapter(
                     child: Container(key: _workKey, child: const WorkSection()),

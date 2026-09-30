@@ -468,6 +468,60 @@ card, and tapping a card opens that site in a new tab.
 - `pubspec.yaml` — adds `web: ^1.1.1` (typed DOM/Window bindings, used on web
   only; resolves from the local pub cache).
 
+## About section (kept, and re-pointed)
+
+The section held one placeholder line promising "the core personal narrative".
+It was left in place rather than removed — the "About" nav anchor, the page
+assembly and the tests all point at it, so deleting it is the more invasive
+change — but its *job* was changed. It used to read like more credentials, which
+the new expertise section already covers; now it is the personal layer:
+
+- `widgets/about_section.dart` — a pull-statement lead (the 1982 Sinclair ZX81,
+  from the regional about pages), a short narrative paragraph, a "HOW I WORK"
+  block of three principles (side by side above 840 px, stacked below), and a
+  quiet pointer to the regional site for education/certifications.
+- Differentiated on purpose: **Expertise = what I do**, **About = who I am and how
+  I work**, **Work = proof**, **Contact = the ask**. Nothing is repeated.
+- `constants/site_constants.dart` — `regionalWebsiteFor(languageCode)` maps the
+  reader's language to a regional site (`ar → nasim.ae`, `ur → nasim.pk`, else
+  `nasim.us`), and the About link opens that site's `/about/`, labelled with the
+  host. This is the one place the CV detail lives on a per-region page, so the
+  hub points there instead of duplicating it.
+- `localization/strings_{en,ur,ar}.dart` — `about_body` was rewritten and
+  `about_lead`, `about_how_i_work`, three `about_principle_*` pairs and
+  `about_regional_note` were added. Principles are read positionally
+  (`about_principle_<n>_title`/`_desc`), so a fourth is a string change plus
+  bumping `_HowIWork.principleCount`.
+- `test/about_section_test.dart` (new) — the narrative, the principles, the
+  per-language regional link, and the Arabic copy.
+
+## Expertise section (capability list + AI-education offer)
+
+The section used to be four generic rows ("Strategy / Technology / Business /
+Growth"). It now states the actual, layered expertise and makes a standing offer
+to teach AI:
+
+- `widgets/expertise_section.dart` — a lead paragraph, then six numbered rows
+  (software/platform architecture, enterprise integration, cloud/DevOps/Linux,
+  AI & language technology, delivery & technical leadership, teaching &
+  mentoring). Rows stack the title over the description below 760 px. The section
+  closes with a highlighted "available for AI education" card: a status pill, a
+  headline, the body copy and a primary CTA.
+- The CTA needs to reach the contact form, so `ExpertiseSection` now takes an
+  `onContact` callback (mirroring `HeroSection`'s `onExplore` / `onContact`) and
+  `pages/home_page.dart` passes `() => _scrollTo(_contactKey)`. It also pushes
+  `cta_click` with `cta_name = ai_education`, matching the existing CTA events.
+- `localization/strings_{en,ur,ar}.dart` — the four old `expertise_item_*` pairs
+  were replaced with six, plus new `expertise_lead`, `expertise_ai_badge`,
+  `expertise_ai_title`, `expertise_ai_body` and `expertise_ai_cta`. Rows read
+  their keys positionally (`expertise_item_<n>_title` / `_desc`), so adding a
+  seventh area is a string change plus bumping `_ExpertiseList.itemCount`.
+- The pill's green dot (`0xFF4ADE80`) is the only colour on the page — it is
+  there to read as a status light. Swap it for a white dot if you want the site
+  strictly monochrome.
+- `test/expertise_section_test.dart` (new) — the six rows, the offer copy, the
+  CTA actually invoking `onContact`, and the Urdu/RTL strings.
+
 ## Footer credit
 
 The docked footer now reads `© <year> Abid Nasim · Developed by Generalsoft
@@ -483,10 +537,13 @@ FZ-LLC`, with **Generalsoft** a link.
   across lines instead of overflowing) holding the copyright, a `·`, the
   "Developed by" label, and the company. Only "Generalsoft" is clickable
   (underlined, brightens on hover, `SystemMouseCursors.click`); it opens in a new
-  tab through `url_launcher_service.dart` and pushes `footer_link_click`. The
-  company name is wrapped in `Directionality(ltr)` — it is Latin text, and bidi
-  would otherwise render it as "FZ-LLC Generalsoft" on the ar/ur pages. Below
-  720 px the brand and the credit stack instead of sharing a line.
+  tab through `url_launcher_service.dart` and pushes `link_click`. The company
+  name is wrapped in `Directionality(ltr)` — it is Latin text, and bidi would
+  otherwise render it as "FZ-LLC Generalsoft" on the ar/ur pages. Below 720 px
+  the brand and the credit stack instead of sharing a line.
+- `widgets/shared/inline_link.dart` (new) — the hover/underline/new-tab link,
+  extracted so the footer credit and the About section's regional link share one
+  implementation. It pushes `link_click` with `link_name` + `destination_url`.
 - `test/footer_test.dart` (new) — the URL mapping per language, the credit text
   in en/ar, the LTR pinning, and no overflow at 360 px.
 
