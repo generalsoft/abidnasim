@@ -1,16 +1,11 @@
-// -----------------------------------------------------------------------------
-// BROWSER URL LAUNCHER (PLACEHOLDER)
-// -----------------------------------------------------------------------------
-//
-// We deliberately don't use dart:html here.
-// Regional site cards and contact buttons call this; real browser
-// navigation gets wired in during a follow-up step.
-// -----------------------------------------------------------------------------
+/// Cross-platform entry point for outbound navigation.
+///
+/// A browser only exists on the web, so the real implementation (which calls
+/// `window.open` through `package:web`) is web-only and every other target — VM
+/// test runs, iOS/Android/macOS builds — gets [url_launcher_service_stub.dart],
+/// where [openUrl] is a no-op. Widgets keep importing this file either way,
+/// mirroring the analytics bridge in `analytics_service.dart`.
+library;
 
-void openUrl(String url) {
-  // TODO: Connect browser navigation.
-  //
-  // Known callers today:
-  // - Presence cards -> https://nasim.pk / .us / .ae
-  // - Contact section -> mailto:, https://wa.me/...
-}
+export 'url_launcher_service_stub.dart'
+    if (dart.library.js_interop) 'url_launcher_service_web.dart';
