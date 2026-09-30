@@ -31,6 +31,27 @@ class SiteConstants {
   static const String uaeWebsite = 'https://nasim.ae';
 
   // ---------------------------------------------------------------------------
+  // Generalsoft (who build and run the site)
+  // ---------------------------------------------------------------------------
+
+  /// Company name as it reads in the footer credit.
+  static const String generalsoftName = 'Generalsoft';
+
+  /// The legal suffix that follows [generalsoftName].
+  static const String generalsoftLegalSuffix = 'FZ-LLC';
+
+  /// Generalsoft's site in English — the target for English and Urdu readers.
+  static const String generalsoftWebsite = 'https://generalsoft.ae/en/';
+
+  /// Generalsoft's site in Arabic — the target for Arabic readers.
+  static const String generalsoftArabicWebsite = 'https://generalsoft.ae/ar/';
+
+  /// The Generalsoft page to open for [languageCode]: Arabic readers get the
+  /// Arabic site, everyone else the English one.
+  static String generalsoftWebsiteFor(String languageCode) =>
+      languageCode == 'ar' ? generalsoftArabicWebsite : generalsoftWebsite;
+
+  // ---------------------------------------------------------------------------
   // Social media
   // ---------------------------------------------------------------------------
 

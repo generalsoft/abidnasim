@@ -10,7 +10,9 @@ import '../widgets/presence_section.dart';
 import '../widgets/shared/section_divider.dart';
 import '../widgets/work_section.dart';
 
-/// The single-page scrolling layout: nav bar plus one section per anchor.
+/// The single-page layout: a docked nav bar and footer frame one scrolling
+/// column of sections (one per anchor), so the header and footer stay put while
+/// the content between them scrolls.
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -38,9 +40,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SelectionArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
+        child: Column(
+          children: [
+            // Docked header: pinned to the top while the sections scroll under it.
+            SafeArea(
+              bottom: false,
               child: NavBar(
                 onHome: () => _scrollTo(_homeKey),
                 onPresence: () => _scrollTo(_presenceKey),
@@ -50,32 +54,40 @@ class _HomePageState extends State<HomePage> {
                 onContact: () => _scrollTo(_contactKey),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                key: _homeKey,
-                child: HeroSection(
-                  onExplore: () => _scrollTo(_presenceKey),
-                  onContact: () => _scrollTo(_contactKey),
-                ),
+            // Only this middle region scrolls; the header and footer frame it.
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Container(
+                      key: _homeKey,
+                      child: HeroSection(
+                        onExplore: () => _scrollTo(_presenceKey),
+                        onContact: () => _scrollTo(_contactKey),
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(key: _presenceKey, child: const SectionDivider()),
+                  ),
+                  const SliverToBoxAdapter(child: PresenceSection()),
+                  SliverToBoxAdapter(
+                    child: Container(key: _expertiseKey, child: const ExpertiseSection()),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(key: _workKey, child: const WorkSection()),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(key: _aboutKey, child: const AboutSection()),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(key: _contactKey, child: const ContactSection()),
+                  ),
+                ],
               ),
             ),
-            SliverToBoxAdapter(
-              child: Container(key: _presenceKey, child: const SectionDivider()),
-            ),
-            const SliverToBoxAdapter(child: PresenceSection()),
-            SliverToBoxAdapter(
-              child: Container(key: _expertiseKey, child: const ExpertiseSection()),
-            ),
-            SliverToBoxAdapter(
-              child: Container(key: _workKey, child: const WorkSection()),
-            ),
-            SliverToBoxAdapter(
-              child: Container(key: _aboutKey, child: const AboutSection()),
-            ),
-            SliverToBoxAdapter(
-              child: Container(key: _contactKey, child: const ContactSection()),
-            ),
-            const SliverToBoxAdapter(child: Footer()),
+            // Docked footer: pinned to the bottom, all the way across.
+            SafeArea(top: false, child: const Footer()),
           ],
         ),
       ),

@@ -72,4 +72,6 @@ const Map<String, String> stringsAr = {
 
   // Footer
   'footer_brand': 'عابد نسيم',
+  'footer_copyright_name': 'عابد نسيم',
+  'footer_developed_by': 'تم التطوير بواسطة',
 };

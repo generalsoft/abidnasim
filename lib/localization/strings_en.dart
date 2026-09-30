@@ -74,4 +74,6 @@ const Map<String, String> stringsEn = {
 
   // Footer
   'footer_brand': 'ABID NASIM',
+  'footer_copyright_name': 'Abid Nasim',
+  'footer_developed_by': 'Developed by',
 };
