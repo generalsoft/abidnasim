@@ -41,3 +41,5 @@ lib/main_backup.dart
 __pycache__/
 # Widget Preview related
 .widget_preview/
+
+.obsidian/
