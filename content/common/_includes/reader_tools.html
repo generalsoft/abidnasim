@@ -1,3 +1,4 @@
+{%- assign rt = site.reader_tools -%}
 <div class="reader-tools">
 
   <button
@@ -7,25 +8,25 @@
     aria-haspopup="true"
     aria-expanded="false"
     aria-controls="reader-tools-panel"
-    aria-label="Reading tools"
-    title="Reading tools">
+    aria-label="{{ rt.open_label | default: 'Reading tools' }}"
+    title="{{ rt.open_label | default: 'Reading tools' }}">
     Aa
   </button>
 
   <div id="reader-tools-panel" class="reader-tools-panel" hidden>
 
     <div class="reader-tools-row">
-      <span class="reader-tools-label">Text size <span id="reader-font-value" class="reader-tools-value">100%</span></span>
+      <span class="reader-tools-label">{{ rt.text_size | default: 'Text size' }} <span id="reader-font-value" class="reader-tools-value">100%</span></span>
       <div class="reader-tools-buttons">
-        <button type="button" id="reader-font-decrease" aria-label="Decrease text size">A−</button>
-        <button type="button" id="reader-font-reset" aria-label="Reset text size">Reset</button>
-        <button type="button" id="reader-font-increase" aria-label="Increase text size">A+</button>
+        <button type="button" id="reader-font-decrease" aria-label="{{ rt.decrease | default: 'Decrease text size' }}">A−</button>
+        <button type="button" id="reader-font-reset" aria-label="{{ rt.reset | default: 'Reset' }}">{{ rt.reset | default: 'Reset' }}</button>
+        <button type="button" id="reader-font-increase" aria-label="{{ rt.increase | default: 'Increase text size' }}">A+</button>
       </div>
     </div>
 
     {%- if site.reader_fonts -%}
     <div class="reader-tools-row">
-      <label class="reader-tools-label" for="reader-font-select">Font</label>
+      <label class="reader-tools-label" for="reader-font-select">{{ rt.font | default: 'Font' }}</label>
       <select id="reader-font-select" class="reader-font-select">
         {%- for font in site.reader_fonts -%}
         <option value="{{ font.stack }}">{{ font.label }}</option>
@@ -35,31 +36,38 @@
     {%- endif -%}
 
     <div class="reader-tools-row">
-      <span class="reader-tools-label">Width</span>
-      <div class="reader-tools-buttons" role="group" aria-label="Reading width">
-        <button type="button" id="reader-width-normal" aria-pressed="true">Normal</button>
-        <button type="button" id="reader-width-wide" aria-pressed="false">Wide</button>
+      <span class="reader-tools-label">{{ rt.width | default: 'Width' }}</span>
+      <div class="reader-tools-buttons" role="group" aria-label="{{ rt.width | default: 'Width' }}">
+        <button type="button" id="reader-width-normal" aria-pressed="true">{{ rt.width_normal | default: 'Normal' }}</button>
+        <button type="button" id="reader-width-wide" aria-pressed="false">{{ rt.width_wide | default: 'Wide' }}</button>
       </div>
     </div>
 
     <div class="reader-tools-row">
       <label class="reader-tools-toggle-row" for="reader-relaxed-spacing">
         <input type="checkbox" id="reader-relaxed-spacing">
-        Relaxed line spacing
+        {{ rt.relaxed | default: 'Relaxed line spacing' }}
       </label>
     </div>
 
     <div class="reader-tools-row">
       <label class="reader-tools-toggle-row" for="reader-underline-links">
         <input type="checkbox" id="reader-underline-links">
-        Underline links
+        {{ rt.underline | default: 'Underline links' }}
       </label>
     </div>
 
     <div class="reader-tools-row">
       <label class="reader-tools-toggle-row" for="reader-focus-mode">
         <input type="checkbox" id="reader-focus-mode">
-        Focus mode (hide distractions)
+        {{ rt.focus | default: 'Focus mode (hide distractions)' }}
+      </label>
+    </div>
+
+    <div class="reader-tools-row">
+      <label class="reader-tools-toggle-row" for="reader-hide-cover">
+        <input type="checkbox" id="reader-hide-cover">
+        {{ rt.hide_cover | default: 'Hide cover image' }}
       </label>
     </div>
 
@@ -88,6 +96,7 @@
   var relaxedCheckbox = document.getElementById("reader-relaxed-spacing");
   var underlineCheckbox = document.getElementById("reader-underline-links");
   var focusCheckbox = document.getElementById("reader-focus-mode");
+  var hideCoverCheckbox = document.getElementById("reader-hide-cover");
 
   function readStoredIndex() {
     var raw = localStorage.getItem("readerFontStepIndex");
@@ -147,6 +156,12 @@
     }
   }
 
+  function applyHideCover(enabled) {
+    root.classList.toggle("reading-hide-cover", enabled);
+    localStorage.setItem("readerHideCover", enabled ? "1" : "0");
+    hideCoverCheckbox.checked = enabled;
+  }
+
   function updateProgress() {
     // The progress line is rendered after this script in the document
     // (see _includes/header.html), so it is resolved on demand rather than at
@@ -188,6 +203,7 @@
   applyRelaxedSpacing(localStorage.getItem("readerRelaxedSpacing") === "1");
   applyUnderlineLinks(localStorage.getItem("readerUnderlineLinks") === "1");
   applyFocus(localStorage.getItem("readerFocus") === "1");
+  applyHideCover(localStorage.getItem("readerHideCover") === "1");
 
   toggle.addEventListener("click", function () {
     var isOpen = !panel.hidden;
@@ -235,6 +251,10 @@
 
   focusCheckbox.addEventListener("change", function () {
     applyFocus(focusCheckbox.checked);
+  });
+
+  hideCoverCheckbox.addEventListener("change", function () {
+    applyHideCover(hideCoverCheckbox.checked);
   });
 
   // Focus mode: the floating button and the Esc key both leave it; a thin

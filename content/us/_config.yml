@@ -27,6 +27,28 @@ reader_fonts:
   - label: "Atkinson Hyperlegible"
     stack: "'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
 
+# Reader-tools UI wording (_includes/reader_tools.html, _includes/header.html).
+# English fallbacks live in the includes, so a region defines this block only to
+# translate the panel; every key is optional. Font choices are in `reader_fonts`
+# above.
+reader_tools:
+  open_label: "Reading tools"
+  text_size: "Text size"
+  font: "Font"
+  width: "Width"
+  width_normal: "Normal"
+  width_wide: "Wide"
+  decrease: "Decrease text size"
+  increase: "Increase text size"
+  reset: "Reset"
+  relaxed: "Relaxed line spacing"
+  underline: "Underline links"
+  focus: "Focus mode (hide distractions)"
+  hide_cover: "Hide cover image"
+  exit_focus: "Exit focus"
+  exit_focus_label: "Exit focus mode"
+  exit_focus_title: "Exit focus mode (Esc)"
+
 # Labels used by the shared post layout (content/common/_layouts/post.html)
 section_labels:
   work: Work

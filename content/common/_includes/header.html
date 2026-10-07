@@ -60,9 +60,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     id="focus-exit"
     class="focus-exit"
     type="button"
-    aria-label="Exit focus mode"
-    title="Exit focus mode (Esc)">
-    ✕ Exit focus
+    aria-label="{{ site.reader_tools.exit_focus_label | default: 'Exit focus mode' }}"
+    title="{{ site.reader_tools.exit_focus_title | default: 'Exit focus mode (Esc)' }}">
+    ✕ {{ site.reader_tools.exit_focus | default: 'Exit focus' }}
   </button>
 
 </header>

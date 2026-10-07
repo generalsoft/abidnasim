@@ -29,6 +29,28 @@ reader_fonts:
   - label: "Noto Kufi Arabic"
     stack: "'Noto Kufi Arabic', 'Noto Sans Arabic', sans-serif"
 
+# Reader-tools UI wording (_includes/reader_tools.html, _includes/header.html).
+# English fallbacks live in the includes, so a region defines this block only to
+# translate the panel; every key is optional. Font choices are in `reader_fonts`
+# above.
+reader_tools:
+  open_label: "أدوات القراءة"
+  text_size: "حجم النص"
+  font: "الخط"
+  width: "العرض"
+  width_normal: "عادي"
+  width_wide: "واسع"
+  decrease: "تصغير النص"
+  increase: "تكبير النص"
+  reset: "إعادة ضبط"
+  relaxed: "تباعد أسطر مريح"
+  underline: "تسطير الروابط"
+  focus: "وضع التركيز (إخفاء المشتّتات)"
+  hide_cover: "إخفاء صورة الغلاف"
+  exit_focus: "إنهاء التركيز"
+  exit_focus_label: "إنهاء وضع التركيز"
+  exit_focus_title: "إنهاء وضع التركيز (Esc)"
+
 # Arabic labels used by the shared post layout (content/common/_layouts/post.html)
 section_labels:
   work: الأعمال

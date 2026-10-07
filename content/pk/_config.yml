@@ -27,6 +27,28 @@ reader_fonts:
   - label: "Noto Naskh Arabic"
     stack: "'Noto Naskh Arabic', serif"
 
+# Reader-tools UI wording (_includes/reader_tools.html, _includes/header.html).
+# English fallbacks live in the includes, so a region defines this block only to
+# translate the panel; every key is optional. Font choices are in `reader_fonts`
+# above.
+reader_tools:
+  open_label: "پڑھنے کے اوزار"
+  text_size: "متن کا سائز"
+  font: "فونٹ"
+  width: "چوڑائی"
+  width_normal: "عام"
+  width_wide: "چوڑا"
+  decrease: "متن کا سائز گھٹائیں"
+  increase: "متن کا سائز بڑھائیں"
+  reset: "ری سیٹ"
+  relaxed: "آرام دہ سطری فاصلہ"
+  underline: "لنکس کو انڈر لائن کریں"
+  focus: "توجہ موڈ (خلل چھپائیں)"
+  hide_cover: "سرورق کی تصویر چھپائیں"
+  exit_focus: "توجہ موڈ بند کریں"
+  exit_focus_label: "توجہ موڈ بند کریں"
+  exit_focus_title: "توجہ موڈ بند کریں (Esc)"
+
 # Urdu labels used by the shared post layout (content/common/_layouts/post.html)
 section_labels:
   work: کام

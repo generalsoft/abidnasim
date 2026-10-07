@@ -356,6 +356,11 @@ html {
   text-decoration: underline;
 }
 
+/* Hide the cover image at the top of a post (reader-tools option). */
+.reading-hide-cover .post-cover {
+  display: none;
+}
+
 /* Reader tools: the reading font is applied through --reader-font (defaulted per
    region in assets/main.scss and overridden by the font <select>); the reading
    width and focus mode are class toggles on <html>. Logical properties keep

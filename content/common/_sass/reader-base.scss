@@ -1,0 +1,14 @@
+// Reader-tools text size — makes minima's typography scale.
+//
+// minima sizes body copy, headings, .post-title, .post-meta, blockquote and code
+// in *pixels* (its `$base-font-size: 16px` fed through the `relative-font-size()`
+// mixin), so they ignore the root font-size the reader tools change
+// (`html { font-size: calc(100% * var(--reader-scale)) }` in site-extras.scss).
+// Only the values already written in rem/em scaled — which is why the footer and
+// post lede grew while the article text stayed put.
+//
+// Redefining `$base-font-size` here, *before* minima is imported, neutralises
+// minima's own `!default` and turns every one of those sizes back into `rem`, so
+// the whole page (body, headings and chrome alike) scales together. This file
+// must be imported before "minima".
+$base-font-size: 1rem;
