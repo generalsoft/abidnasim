@@ -591,3 +591,62 @@ html[data-theme="dark"] .contact-form .contact-form-status[data-state="notice"] 
   text-decoration: none;
 }
 
+/* ---------------------------------------------------------------------------
+   Docked header + footer — pinned to the viewport so they stay visible while
+   the page scrolls, matching the Flutter app. minima already makes `body` a
+   flex column with `min-height: 100vh` and gives `.page-content` `flex: 1`, so
+   short pages still push the footer down; `sticky` keeps the header/footer in
+   normal flow (their space is reserved, so no compensating padding is needed)
+   while pinning them to the top/bottom of the viewport.
+   --------------------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.site-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  /* Slim docked bar — the footer markup is a single line (see _includes/footer.html). */
+  padding: 10px 0;
+}
+
+/* Minimal footer line (content/common/_includes/footer.html): the author name
+   and the "Developed by …" credit, centered on one line. */
+.footer-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.footer-sep {
+  opacity: 0.6;
+}
+
+.footer-credit a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-credit a:hover,
+.footer-credit a:focus-visible {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.footer-credit .company-suffix {
+  font-size: 0.68em;
+  vertical-align: super;
+  line-height: 0;
+}
+

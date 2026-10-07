@@ -633,3 +633,40 @@ All four sites now serve a branded 404 instead of GitHub Pages' default.
 - The page sets `sitemap: false` and, regardless, `jekyll-sitemap` skips
   `/404.html` by default — so the file never appears in `/sitemap.xml` and the
   Flutter app's presence cards (which read those sitemaps) are unaffected.
+
+## Regional footer (minimal, docked)
+
+`content/common/_includes/footer.html` (new) replaces minima's default footer
+with a single slim line: the author name, a separator (`·`), and the
+"Developed by" credit. The old heading, email, social links and description rows
+are gone — that is what keeps the docked bar short (`.site-footer` padding is cut
+to `10px 0` in `_sass/site-extras.scss`).
+
+Minima's own footer rendered `{{ site.author | escape }}`, but each region's
+`_config.yml` declares `author` as a map (`name: …`), so Liquid printed Ruby's
+hash inspect string — `{"name"=>"Abid Nasim"}`. The override prints
+`site.author.name` instead (falling back to a plain-string author, then the site
+title), so the name reads `Abid Nasim` / `عابد نسیم` / `عابد نسيم` on us/pk/ae.
+jekyll-seo-tag already read the map's `name` correctly, so only the footer needed
+the fix.
+
+## Docked header/footer + "Developed by" credit
+
+Two shared changes for nasim.{us,pk,ae}, both living in `content/common`:
+
+- **Docked bars** — `_sass/site-extras.scss` sets `position: sticky` on
+  `.site-header` (top) and `.site-footer` (bottom) with `z-index: 1000`, so both
+  stay visible while the page scrolls (matching the Flutter app's docked bars).
+  minima's `_base.scss` already lays `body` out as a `min-height: 100vh` flex
+  column with `.page-content { flex: 1 }`, so the footer sits at the bottom even
+  on short pages, and `sticky` keeps the bars in normal flow (their space is
+  reserved — no compensating padding). Content scrolls under the bars, which are
+  opaque (`--background-color`).
+- **Credit** — the footer line renders
+  `Developed by <a target="_blank" rel="noopener">Generalsoft <sup>FZ-LLC</sup></a>.`
+  and opens in a new tab, driven by a new `developer:` block in each region's
+  `_config.yml` (`prefix`, `name`, `suffix`, `url`). "FZ-LLC" is superscripted via
+  `<sup class="company-suffix">` (styled in site-extras). The link target is per
+  region — `generalsoft.ae/en/` for us and pk, `generalsoft.ae/ar/` for ae. The
+  credit span carries `dir="ltr"` so its trailing period renders correctly inside
+  the RTL layouts.

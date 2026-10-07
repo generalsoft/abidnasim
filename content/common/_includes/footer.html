@@ -1,0 +1,19 @@
+{%- comment -%}
+  Minimal docked footer (overrides minima's default): a single slim line with the
+  author name and the "Developed by <company> <suffix>." credit, which opens in a
+  new tab. Shared by nasim.ae / nasim.pk / nasim.us via content/common.
+{%- endcomment -%}
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
+  <div class="wrapper">
+    <p class="footer-line">
+      <span class="p-name">{{ site.author.name | default: site.author | default: site.title | escape }}</span>
+      {%- if site.developer and site.developer.url -%}
+      <span class="footer-sep" aria-hidden="true">·</span>
+      <span class="footer-credit" dir="ltr">{{ site.developer.prefix | default: "Developed by" | escape }} <a href="{{ site.developer.url }}" target="_blank" rel="noopener">{{ site.developer.name | escape }} <sup class="company-suffix">{{ site.developer.suffix | escape }}</sup></a>.</span>
+      {%- endif -%}
+    </p>
+  </div>
+
+</footer>

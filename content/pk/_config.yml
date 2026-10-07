@@ -44,6 +44,13 @@ not_found:
   home_label: "واپس صفحۂ اول"
   sections_label: "مقبول صفحات"
 
+# "Developed by" footer credit (rendered by content/common/_includes/footer.html).
+developer:
+  prefix: "Developed by"
+  name: "Generalsoft"
+  suffix: "FZ-LLC"
+  url: "https://generalsoft.ae/en/"
+
 header_pages:
   - work.md
   - blog.md
