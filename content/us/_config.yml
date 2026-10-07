@@ -37,6 +37,13 @@ contact_form:
   error_message: "The message could not be sent. Please try again, or use the email / WhatsApp links above."
   unavailable_message: "The form is not available right now. Please use the email or WhatsApp links above."
 
+# 404 page (content/common/404.html). GitHub Pages serves it for unknown URLs.
+not_found:
+  heading: "Page not found"
+  message: "The page you were looking for doesn’t exist or has moved."
+  home_label: "Back to home"
+  sections_label: "Popular pages"
+
 header_pages:
   - work.md
   - blog.md

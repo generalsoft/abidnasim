@@ -504,5 +504,90 @@ html[data-theme="dark"] .contact-form .contact-form-status[data-state="notice"] 
   color: #e0c070;
 }
 
+/* ---------------------------------------------------------------------------
+   404 page (content/common/404.html) — shared by every regional site.
+   Uses the theme CSS variables (see :root / html[data-theme="dark"] above),
+   so it follows the reader's light/dark choice and works in LTR and RTL.
+   --------------------------------------------------------------------------- */
 
+.not-found {
+  max-width: 620px;
+  margin: 8vh auto;
+  text-align: center;
+}
+
+.not-found-code {
+  margin: 0;
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: var(--link-color);
+}
+
+.not-found-title {
+  margin: 0.5rem 0 1rem;
+  font-size: 2rem;
+}
+
+.not-found-message {
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+.not-found-home-link {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--text-color);
+  color: var(--background-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.not-found-home-link:hover {
+  opacity: 0.85;
+}
+
+.not-found-home-link:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+.not-found-links {
+  margin-top: 3rem;
+}
+
+.not-found-links-label {
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.not-found-links ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.not-found-links li {
+  margin: 0;
+}
+
+.not-found-links a {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--toggle-background);
+  text-decoration: none;
+}
 

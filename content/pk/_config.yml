@@ -37,6 +37,13 @@ contact_form:
   error_message: "پیغام نہیں بھیجا جا سکا۔ براہِ کرم دوبارہ کوشش کریں یا اوپر دیے گئے ای میل / واٹس ایپ روابط استعمال کریں۔"
   unavailable_message: "یہ فارم اس وقت دستیاب نہیں ہے۔ براہِ کرم اوپر دیے گئے ای میل یا واٹس ایپ روابط استعمال کریں۔"
 
+# 404 page (content/common/404.html). GitHub Pages serves it for unknown URLs.
+not_found:
+  heading: "صفحہ نہیں ملا"
+  message: "آپ جس صفحے کی تلاش کر رہے ہیں وہ موجود نہیں یا منتقل ہو چکا ہے۔"
+  home_label: "واپس صفحۂ اول"
+  sections_label: "مقبول صفحات"
+
 header_pages:
   - work.md
   - blog.md

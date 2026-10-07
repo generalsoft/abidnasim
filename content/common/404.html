@@ -1,0 +1,46 @@
+---
+# Shared 404 page for every regional site (nasim.ae, nasim.pk, nasim.us).
+# GitHub Pages serves this file automatically for any URL it can't resolve.
+# Copy is localized per region via the `not_found:` block in each _config.yml,
+# and the quick links reuse the localized titles of the region's header_pages.
+#
+# `sitemap: false` keeps it out of /sitemap.xml (jekyll-sitemap also skips
+# "/404.html" by default); either way it never reaches the Flutter app's
+# presence cards, which read the region sitemaps at runtime.
+layout: default
+permalink: /404.html
+title: "404"
+sitemap: false
+---
+
+<div class="not-found">
+
+  <p class="not-found-code" aria-hidden="true">404</p>
+
+  <h1 class="not-found-title">{{ site.not_found.heading | default: "Page not found" }}</h1>
+
+  <p class="not-found-message">{{ site.not_found.message | default: "The page you were looking for doesn’t exist or has moved." }}</p>
+
+  <p class="not-found-home">
+    <a class="not-found-home-link" href="{{ '/' | relative_url }}">
+      {{ site.not_found.home_label | default: "Back to home" }}
+    </a>
+  </p>
+
+  {%- assign default_paths = site.pages | map: "path" -%}
+  {%- assign page_paths = site.header_pages | default: default_paths -%}
+  {%- if page_paths -%}
+  <nav class="not-found-links" aria-label="{{ site.not_found.sections_label | default: 'Popular pages' }}">
+    <p class="not-found-links-label">{{ site.not_found.sections_label | default: "Popular pages" }}</p>
+    <ul>
+      {%- for path in page_paths -%}
+        {%- assign my_page = site.pages | where: "path", path | first -%}
+        {%- if my_page.title -%}
+        <li><a href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </nav>
+  {%- endif -%}
+
+</div>

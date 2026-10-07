@@ -598,3 +598,38 @@ frame the scroll viewport and their positions don't move when it scrolls.
 Caveat: a card can only show what the browser will let it frame. If a regional
 site ever sends `X-Frame-Options`/`frame-ancestors`, that card will be blank
 (the dark fallback panel shows through); the tap-to-open behaviour is unaffected.
+
+## Custom 404 pages
+
+All four sites now serve a branded 404 instead of GitHub Pages' default.
+
+### abidnasim.com (Flutter web)
+
+- `web/404.html` (new) — a standalone dark page matching the app (`#08090D`,
+  grayscale gradient "404", a "Back to home" button and links to the three
+  regional sites). It carries the same GTM container as `web/index.html`
+  (`GTM-N3H2VWT3`), so 404 hits still land in GA4.
+- `flutter build web` copies everything in `web/` into `build/web/`, so the file
+  ships as `build/web/404.html` automatically — no change to the workflow was
+  needed. GitHub Pages serves it for any path the SPA doesn't resolve.
+- `docs/404.html` (new) — an identical copy for the committed `docs/` build (the
+  same build the workflow reads `docs/CNAME` from). `web/404.html` is the source
+  of truth; keep the two in sync.
+
+### nasim.{us,pk,ae} (Jekyll)
+
+- `content/common/404.html` (new) — one shared 404 for all three regional sites,
+  built on minima's `default` layout so it keeps the site header/nav/footer, the
+  theme toggle and the reader tools. It reuses the existing `header_pages`
+  mechanism to render quick links from each region's localized page titles.
+- Copy is localized through a new `not_found:` block in each region's
+  `_config.yml` (`heading`, `message`, `home_label`, `sections_label`) — English
+  for us, Urdu for pk, Arabic for ae — matching how `contact_form:` is already
+  handled. All strings fall back to English defaults in the template.
+- Styling lives in `content/common/_sass/site-extras.scss` under `.not-found*`,
+  using the shared `--background-color` / `--text-color` / `--link-color` /
+  `--border-color` / `--toggle-background` variables, so it follows the light/dark
+  toggle and works in LTR and RTL.
+- The page sets `sitemap: false` and, regardless, `jekyll-sitemap` skips
+  `/404.html` by default — so the file never appears in `/sitemap.xml` and the
+  Flutter app's presence cards (which read those sitemaps) are unaffected.

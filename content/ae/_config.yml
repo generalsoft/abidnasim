@@ -37,6 +37,13 @@ contact_form:
   error_message: "تعذّر إرسال الرسالة. حاول مرة أخرى، أو استخدم روابط البريد الإلكتروني / واتساب في الأعلى."
   unavailable_message: "النموذج غير متاح حاليًا. يُرجى استخدام روابط البريد الإلكتروني أو واتساب في الأعلى."
 
+# 404 page (content/common/404.html). GitHub Pages serves it for unknown URLs.
+not_found:
+  heading: "الصفحة غير موجودة"
+  message: "الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+  home_label: "العودة إلى الصفحة الرئيسية"
+  sections_label: "صفحات شائعة"
+
 header_pages:
   - work.md
   - blog.md
