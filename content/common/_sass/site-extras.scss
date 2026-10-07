@@ -356,6 +356,109 @@ html {
   text-decoration: underline;
 }
 
+/* Reader tools: the reading font is applied through --reader-font (defaulted per
+   region in assets/main.scss and overridden by the font <select>); the reading
+   width and focus mode are class toggles on <html>. Logical properties keep
+   these correct in RTL. */
+
+.reader-tools-value {
+  margin-inline-start: 6px;
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+}
+
+.reader-font-select {
+  max-width: 160px;
+  padding: 4px 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--toggle-background);
+  color: var(--text-color);
+  font: inherit;
+  font-size: 13px;
+}
+
+.reader-tools-buttons button[aria-pressed="true"] {
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+
+/* Full-page reading: widen the article column to the whole viewport instead of
+   minima's 800px measure. Scoped to .page-content so the docked header/footer
+   bars keep their centered width. */
+.reading-wide .page-content .wrapper {
+  max-width: none;
+}
+
+/* Focus mode (distraction-free): drop the docked header/footer so only the
+   article remains. The header element itself stays (shrunk to zero height) so
+   its fixed-positioned progress line and exit control stay usable. */
+.reading-focus .site-header {
+  min-height: 0;
+  border: 0;
+}
+
+.reading-focus .site-header .wrapper {
+  display: none;
+}
+
+.reading-focus .site-footer {
+  display: none;
+}
+
+/* Reading progress line + focus-mode exit control (see _includes/header.html). */
+.reading-progress {
+  display: none;
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 3px;
+  z-index: 2000;
+}
+
+.reading-focus .reading-progress {
+  display: block;
+}
+
+.reading-progress-bar {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--link-color);
+}
+
+.focus-exit {
+  display: none;
+  position: fixed;
+  inset-block-start: 14px;
+  inset-inline-end: 14px;
+  z-index: 2000;
+
+  align-items: center;
+  gap: 6px;
+
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.reading-focus .focus-exit {
+  display: inline-flex;
+}
+
+.focus-exit:hover {
+  opacity: 0.85;
+}
+
+.focus-exit:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
 /* Contact form (Firestore) — see content/common/_includes/contact_form.html.
    Selectors are scoped under .contact-form so they beat minima's own
    .page-content / .post-content element rules. */

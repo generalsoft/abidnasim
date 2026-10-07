@@ -1,15 +1,20 @@
 ---
 ---
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400&family=Rubik:wght@500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Atkinson+Hyperlegible:wght@400;700&display=swap');
 
 @import "minima";
 @import "site-extras";
 
-// Public Sans for body text, Rubik for headings — both support the
-// reader-tools font-size scaling since they're set in rem/em throughout
-// minima's own stylesheet.
+// Body text font. The reader-tools panel can switch this at runtime (see
+// _includes/reader_tools.html); the default mirrors `reader_fonts` in
+// _config.yml. Rubik remains the display font for headings. Everything is set
+// in rem/em throughout minima, so the reader-tools font-size scaling still works.
+:root {
+  --reader-font: 'Public Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
 body {
-  font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--reader-font);
 }
 
 h1, h2, h3, h4, h5, h6,

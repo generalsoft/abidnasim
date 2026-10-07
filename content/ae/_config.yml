@@ -15,6 +15,20 @@ author:
 minima:
   date_format: "%Y-%m-%d"
 
+# Reader-tools font choices (_includes/reader_tools.html). The first entry is
+# the site default; each stack is applied through the --reader-font CSS variable
+# (assets/main.scss). Any family listed here must also be loaded by the Google
+# Fonts @import at the top of assets/main.scss.
+reader_fonts:
+  - label: "Cairo (default)"
+    stack: "'Cairo', 'Noto Sans Arabic', -apple-system, BlinkMacSystemFont, sans-serif"
+  - label: "Noto Naskh Arabic"
+    stack: "'Noto Naskh Arabic', serif"
+  - label: "Amiri"
+    stack: "'Amiri', 'Noto Naskh Arabic', serif"
+  - label: "Noto Kufi Arabic"
+    stack: "'Noto Kufi Arabic', 'Noto Sans Arabic', sans-serif"
+
 # Arabic labels used by the shared post layout (content/common/_layouts/post.html)
 section_labels:
   work: الأعمال

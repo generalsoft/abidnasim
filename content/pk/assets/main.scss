@@ -1,6 +1,6 @@
 ---
 ---
-@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Gulzar&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap');
 
 @import "minima";
 @import "site-extras";
@@ -36,8 +36,12 @@ code {
 // size and looser line-height than Latin/Naskh text to stay legible —
 // these overrides apply on top of the reader-tools font-size scaling,
 // which still works normally since everything here is in rem/em.
+:root {
+  --reader-font: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+}
+
 body {
-  font-family: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  font-family: var(--reader-font);
   font-size: 1.2rem;
   line-height: 2.2;
 }

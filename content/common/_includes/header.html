@@ -50,4 +50,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   </div>
 
+  <!-- Focus mode (see _includes/reader_tools.html) hides the docked header and
+       footer. These two controls sit outside .wrapper so they stay reachable
+       while the header bar is hidden: a thin scroll-progress line and an exit
+       button. Both are display:none unless <html> has the reading-focus class. -->
+  <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar" class="reading-progress-bar"></span></div>
+
+  <button
+    id="focus-exit"
+    class="focus-exit"
+    type="button"
+    aria-label="Exit focus mode"
+    title="Exit focus mode (Esc)">
+    ✕ Exit focus
+  </button>
+
 </header>

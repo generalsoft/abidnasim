@@ -15,6 +15,18 @@ author:
 minima:
   date_format: "%Y-%m-%d"
 
+# Reader-tools font choices (_includes/reader_tools.html). The first entry is
+# the site default; each stack is applied through the --reader-font CSS variable
+# (assets/main.scss). Any family listed here must also be loaded by the Google
+# Fonts @import at the top of assets/main.scss.
+reader_fonts:
+  - label: "Noto Nastaliq Urdu (default)"
+    stack: "'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif"
+  - label: "Gulzar"
+    stack: "'Gulzar', 'Noto Nastaliq Urdu', serif"
+  - label: "Noto Naskh Arabic"
+    stack: "'Noto Naskh Arabic', serif"
+
 # Urdu labels used by the shared post layout (content/common/_layouts/post.html)
 section_labels:
   work: کام
