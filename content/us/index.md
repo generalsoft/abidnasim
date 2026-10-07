@@ -4,15 +4,23 @@ title: Hello, my name is Abid Nasim
 permalink: /
 ---
 
-**I am a full stack Platform Engineer.**
+<div class="hero">
 
-Developer • Writer • Mentor
+  <div class="hero-content">
 
-<div class="page-images">
-  <img src="/assets/AN-Rotana.jpg" alt="Abid Nasim standing">
+    <p><strong>I am a full stack Platform Engineer.</strong></p>
+
+    <p>Developer • Writer • Mentor</p>
+
+    <p>See <a href="/about/">About</a> for my contact card QR code</p>
+
+  </div>
+
+  <div class="hero-image">
+    <img src="/assets/AN-Rotana.jpg" alt="Abid Nasim standing">
+  </div>
+
 </div>
-
-See [About](/about/) for my contact card QR code
 
 ## Platform Engineer
 
