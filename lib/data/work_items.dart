@@ -182,12 +182,12 @@ const List<WorkItem> workItems = [
     },
   ),
   WorkItem(
-    slug: 'sme-erp-elahi-electronics',
+    slug: 'sme-erp',
     imageAsset: 'assets/images/work/sme-erp.svg',
     title: {
-      'en': 'Full SME ERP Solution — Elahi Electronics',
-      'ur': 'مکمل SME ERP حل — الٰہی الیکٹرانکس',
-      'ar': 'حل تخطيط موارد كامل للشركات الصغيرة والمتوسطة — الإلهي للإلكترونيات',
+      'en': 'Full SME ERP Solution',
+      'ur': 'مکمل SME ERP حل',
+      'ar': 'حل تخطيط موارد كامل للشركات الصغيرة والمتوسطة',
     },
     description: {
       'en':

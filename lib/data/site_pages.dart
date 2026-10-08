@@ -29,7 +29,7 @@ const List<String> _postPaths = <String>[
   '/work/esb-banking/',
   '/work/multicloud-iot-poc/',
   '/work/cruise-fleet-integration/',
-  '/work/sme-erp-elahi-electronics/',
+  '/work/sme-erp/',
   '/work/nasa-knowledge-wiki/',
   // blog
   '/blog/how-ai-thinks/',
